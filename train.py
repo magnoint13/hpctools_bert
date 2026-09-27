@@ -1,12 +1,12 @@
 #!/bin/env python3
 
 # Install dependencies
-# pip install tensorflow[and-cuda] torch transformers datasets tensorboard
+# pip install torch transformers datasets tensorboard
 
 # Python libs
 import time
 import os
-import argparser
+import argparse
 
 # Libraries
 import torch
@@ -31,7 +31,7 @@ MODEL_NAME = "google-bert/bert-base-uncased"
 
 parser = argparse.ArgumentParser(description="Training BERT script")
 parser.add_argument("-b", "--batch-size", type=int, default=16)
-parser.add_argument("-l", "--max-length", type=int, default=384)
+parser.add_argument("--max-length", type=int, default=384) # max 512
 parser.add_argument("-e", "--epochs", type=int, default=1)
 parser.add_argument("--lr", type=float, default=2e-5)
 parser.add_argument("-c", "--workers", type=int, default=8)
@@ -43,7 +43,9 @@ parser.add_argument("-s", "--save-steps", type=int, default=200)
 parser.add_argument("-p", "--profiler", type=str, default="./log/baseline2")
 parser.add_argument("--checkpoint", type=str, default="checkpoints/checkpoint.pt")
 parser.add_argument("--model", type=str, default="checkpoints/model.pt")
-parser.add_argument("-r", "--resume", type=bool, action="store_true", default=False)
+parser.add_argument("-r", "--resume", action="store_true", default=False)
+
+args = parser.parse_args()
 
 #### MODEL LOAD ################################################################
 
@@ -111,7 +113,7 @@ def save_checkpoint(epoch, step):
     }, tmp)
     os.replace(tmp, args.checkpoint)
 
-total_steps = len(train_loader) * args.num_epochs
+total_steps = len(train_loader) * args.epochs
 scheduler = get_linear_schedule_with_warmup(
     optimizer, num_warmup_steps=0, num_training_steps=total_steps
 )
@@ -143,8 +145,9 @@ with profile(
 
     torch.cuda.synchronize()
     t0 = time.perf_counter()
+    overhead = 0.0
 
-    for epoch in range(start_epoch, args.num_epochs):
+    for epoch in range(start_epoch, args.epochs):
         running_loss = 0.0
 
         for batch in train_loader:
@@ -167,15 +170,18 @@ with profile(
             if global_step % args.save_steps == 0:
                 save_checkpoint(epoch, global_step)
 
+        eval_t0 = time.perf_counter()
         save_checkpoint(epoch + 1, global_step)
         em, f1 = eval_model.evaluate(device, model, val_loader, val_features)
         print(f"[epoch {epoch}] validation EM={em:.4f} F1={f1:.4f}")
+        eval_t1 = time.perf_counter()
+        overhead += eval_t1 - eval_t0
 
     torch.cuda.synchronize()
     t1 = time.perf_counter()
 
 
-print(f"Training time: {t1 - t0:.2f}s")
+print(f"Total time: {t1 - t0:.4f}s\nOverhead: {overhead:.4f}s\nTraining time: {t1 - t0 - overhead:.4f}s")
 torch.save(model.state_dict(), args.model)
 print("Final model saved")
 

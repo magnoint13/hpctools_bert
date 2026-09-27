@@ -3,6 +3,7 @@
 import argparse
 import torch
 from transformers import BertForQuestionAnswering, BertTokenizerFast
+import token_model
 
 DEFAULT_MODEL_PATH = "checkpoints/model.pt"
 MAX_LENGTH = 384
@@ -33,7 +34,8 @@ def answer_question(question, context, model, tokenizer, device):
 
 def main():
     parser = argparse.ArgumentParser(description="Inferencia manual con BERT fine-tuned en SQuAD")
-    parser.add_argument("--model-path", default=DEFAULT_MODEL_PATH)
+    parser.add_argument("--model-path", type=str, default=DEFAULT_MODEL_PATH)
+    parser.add_argument("--max-length", type=int, default=MAX_LENGTH)
     args = parser.parse_args()
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")

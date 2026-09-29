@@ -7,6 +7,7 @@
 import time
 import os
 import argparse
+import contextlib # disable AMP
 
 # Libraries
 import torch
@@ -29,6 +30,7 @@ import token_model
 
 MODEL_NAME = "google-bert/bert-base-uncased"
 
+# general config options
 parser = argparse.ArgumentParser(description="Training BERT script")
 parser.add_argument("-b", "--batch-size", type=int, default=16)
 parser.add_argument("--max-length", type=int, default=384) # max 512
@@ -40,12 +42,17 @@ parser.add_argument("-v", "--validation-subset", type=int, default=None)
 parser.add_argument("-l", "--log-steps", type=int, default=20)
 parser.add_argument("-s", "--save-steps", type=int, default=200)
 
+# file options
 parser.add_argument("-p", "--profiler", type=str, default="./log/baseline")
 parser.add_argument("--checkpoint", type=str, default="checkpoints/checkpoint.pt")
 parser.add_argument("--model", type=str, default="checkpoints/model.pt")
 parser.add_argument("-r", "--resume", action="store_true", default=False)
 
+# optimization options
 parser.add_argument("--compile", type=str, choices=("default", "reduce-overhead", "max-autotune"), default=None)
+parser.add_argument("--amp", action="store_true", default=False)
+parser.add_argument("--tf32", action="store_true", default=False)
+parser.add_argument("--fused", action="store_true", default=False)
 
 args = parser.parse_args()
 
@@ -55,8 +62,8 @@ if not torch.cuda.is_available():
     print("CUDA is not available")
     exit(1)
 
-# use TF32 for operations out of autocast BF16
-torch.set_float32_matmul_precision("high")
+# lower precision
+torch.set_float32_matmul_precision("high" if args.tf32 else "highest")
 
 device = torch.device("cuda")
 model = BertForQuestionAnswering.from_pretrained(MODEL_NAME).to(device)
@@ -69,7 +76,7 @@ if args.compile:
     t1 = time.perf_counter()
     print(f"Model compilation finished in {t1 - t0:.4f}s")
 
-optimizer = torch.optim.AdamW(model.parameters(), lr=args.lr, fused=True)
+optimizer = torch.optim.AdamW(model.parameters(), lr=args.lr, fused=args.fused)
 
 
 #### DATASET LOAD ##############################################################
@@ -171,6 +178,12 @@ if args.resume and os.path.exists(args.checkpoint):
 
 #### TRAINING LOOP #############################################################
 
+amp_ctx = (
+    torch.autocast("cuda", dtype=torch.bfloat16)
+    if args.amp else
+    contextlib.nullcontext()
+)
+
 model.train()
 
 with profile(
@@ -193,7 +206,7 @@ with profile(
             batch = {k: v.to(device, non_blocking=True) for k, v in batch.items()}
 
             optimizer.zero_grad(set_to_none=True)
-            with torch.autocast('cuda', dtype=torch.bfloat16):
+            with amp_ctx:
                 output = model(**batch)
             output.loss.backward()
             optimizer.step()

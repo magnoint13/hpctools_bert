@@ -45,6 +45,8 @@ parser.add_argument("--checkpoint", type=str, default="checkpoints/checkpoint.pt
 parser.add_argument("--model", type=str, default="checkpoints/model.pt")
 parser.add_argument("-r", "--resume", action="store_true", default=False)
 
+parser.add_argument("--compile", type=str, choices=("default", "reduce-overhead", "max-autotune"), default=None)
+
 args = parser.parse_args()
 
 #### MODEL LOAD ################################################################
@@ -53,11 +55,21 @@ if not torch.cuda.is_available():
     print("CUDA is not available")
     exit(1)
 
+# use TF32 for operations out of autocast BF16
+torch.set_float32_matmul_precision("high")
+
 device = torch.device("cuda")
 model = BertForQuestionAnswering.from_pretrained(MODEL_NAME).to(device)
 tokenizer = BertTokenizerFast.from_pretrained(MODEL_NAME)
 
-optimizer = torch.optim.AdamW(model.parameters(), lr=args.lr)
+if args.compile:
+    print("Model compilation started")
+    t0 = time.perf_counter()
+    model = torch.compile(model)
+    t1 = time.perf_counter()
+    print(f"Model compilation finished in {t1 - t0:.4f}s")
+
+optimizer = torch.optim.AdamW(model.parameters(), lr=args.lr, fused=True)
 
 
 #### DATASET LOAD ##############################################################
@@ -91,18 +103,29 @@ train_loader = DataLoader(
     shuffle=True,
     pin_memory=True,
     num_workers=args.workers,
+    persistent_workers=True,
+    prefetch_factor=4,
+    drop_last=True,
 )
 
 val_features = raw["validation"].map(tokenize_val, batched=True)
 model_columns = ("input_ids", "attention_mask", "token_type_ids")
 val_inputs = val_features.remove_columns([c for c in val_features.column_names if c not in model_columns])
 val_inputs.set_format("torch")
-val_loader = DataLoader(val_inputs, batch_size=args.batch_size, shuffle=False)
+val_loader = DataLoader(
+    val_inputs,
+    batch_size=args.batch_size,
+    shuffle=False,
+    pin_memory=True,
+)
 
 
 #### CHECKPOINTS ###############################################################
 
 def save_checkpoint(epoch, step):
+    print("Model checkpoint started")
+    t0 = time.perf_counter()
+
     tmp = args.checkpoint + ".tmp"
     torch.save({
         "model": model.state_dict(),
@@ -112,6 +135,9 @@ def save_checkpoint(epoch, step):
         "step": step,
     }, tmp)
     os.replace(tmp, args.checkpoint)
+
+    t1 = time.perf_counter()
+    print(f"Model checkpoint finished in {t1 - t0:.4f}s")
 
 total_steps = len(train_loader) * args.epochs
 scheduler = get_linear_schedule_with_warmup(
@@ -123,6 +149,9 @@ global_step = 0
 
 os.makedirs(os.path.dirname(args.checkpoint), exist_ok=True)
 if args.resume and os.path.exists(args.checkpoint):
+    print("Model resume started")
+    t0 = time.perf_counter()
+
     checkpoint = torch.load(args.checkpoint, map_location=device)
     model.load_state_dict(checkpoint["model"])
     optimizer.load_state_dict(checkpoint["optimizer"])
@@ -130,6 +159,9 @@ if args.resume and os.path.exists(args.checkpoint):
     start_epoch = checkpoint["epoch"]
     global_step = checkpoint["step"]
     print(f"Starting from epoch {start_epoch} & step {global_step}")
+
+    t1 = time.perf_counter()
+    print(f"Model resume finished in {t1 - t0:.4f}s")
 
 
 #### TRAINING LOOP #############################################################
@@ -148,27 +180,31 @@ with profile(
     overhead = 0.0
 
     for epoch in range(start_epoch, args.epochs):
-        running_loss = 0.0
+        running_loss = torch.zeros((), device=device)
 
         for batch in train_loader:
             batch = {k: v.to(device, non_blocking=True) for k, v in batch.items()}
 
-            optimizer.zero_grad()
-            output = model(**batch)
+            optimizer.zero_grad(set_to_none=True)
+            with torch.autocast('cuda', dtype=torch.bfloat16):
+                output = model(**batch)
             output.loss.backward()
             optimizer.step()
             scheduler.step()
 
-            running_loss += output.loss.item()
+            running_loss += output.loss.detach()
             global_step += 1
             prof.step()
 
+            checkpoint_t0 = time.perf_counter()
             if global_step % args.log_steps == 0:
-                print(f"[epoch {epoch}][step {global_step}/{total_steps}] loss={running_loss / args.log_steps:.4f}")
-                running_loss = 0.0
+                print(f"[epoch {epoch}][step {global_step}/{total_steps}] loss={running_loss.item() / args.log_steps:.4f}")
+                running_loss = torch.zeros((), device=device)
 
             if global_step % args.save_steps == 0:
                 save_checkpoint(epoch, global_step)
+            checkpoint_t1 = time.perf_counter()
+            overhead += checkpoint_t1 - checkpoint_t0
 
         eval_t0 = time.perf_counter()
         save_checkpoint(epoch + 1, global_step)
@@ -179,6 +215,10 @@ with profile(
 
     torch.cuda.synchronize()
     t1 = time.perf_counter()
+
+    print(f"Memory used: {torch.cuda.max_memory_allocated() / 1e9} GB")
+    print(prof.key_averages().table(sort_by="cuda_time_total"))
+    prof.export_chrome_trace(args.profiler + "chrome.trace")
 
 
 print(f"Total time: {t1 - t0:.4f}s\nOverhead: {overhead:.4f}s\nTraining time: {t1 - t0 - overhead:.4f}s")

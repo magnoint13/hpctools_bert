@@ -9,6 +9,22 @@
 #SBATCH --output=log/%x_%j.out
 
 module load cesga/2022 python/3.10.8
+
 source $STORE/hpc_tools/bert/bin/activate
-python3 train.py --resume --batch-size=128 --epochs=2 --workers=32 --train-subset=10000 --validation-subset=200 --checkpoint=checkpoints/bit_chk.pt --model=checkpoints/big_model.pt --profiler=log/big_baseline
+
+mkdir -p $LUSTRE/hpc_tools/bert/hf_home
+mkdir -p $LUSTRE/hpc_tools/bert/models
+mkdir -p $LUSTRE/hpc_tools/bert/checkpoints
+mkdir -p $LUSTRE/hpc_tools/bert/logs
+
+export HF_HOME=$LUSTRE/hpc_tools/bert
+
+# 32 workers might compete with the main task,
+# lower it to 16 to avoid the start overhead.
+python3 train.py --resume --compile="default" \
+    --batch-size=128 --epochs=2 --workers=16 \
+    --train-subset=10000 --validation-subset=200 \
+    --checkpoint=checkpoints/bit_chk.pt \
+    --model=models/big_model.pt \
+    --profiler=logs/big_baseline
 

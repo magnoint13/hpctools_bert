@@ -65,7 +65,7 @@ tokenizer = BertTokenizerFast.from_pretrained(MODEL_NAME)
 if args.compile:
     print("Model compilation started")
     t0 = time.perf_counter()
-    model = torch.compile(model)
+    model = torch.compile(model, mode=args.compile)
     t1 = time.perf_counter()
     print(f"Model compilation finished in {t1 - t0:.4f}s")
 
@@ -117,10 +117,15 @@ val_loader = DataLoader(
     batch_size=args.batch_size,
     shuffle=False,
     pin_memory=True,
+    drop_last=True,
 )
 
 
 #### CHECKPOINTS ###############################################################
+
+# compiled models store their keys with the preffix '_orig_mod.'
+def unwrap(m):
+    return m._orig_mod if hasattr(m, "_orig_mod") else m
 
 def save_checkpoint(epoch, step):
     print("Model checkpoint started")
@@ -128,7 +133,7 @@ def save_checkpoint(epoch, step):
 
     tmp = args.checkpoint + ".tmp"
     torch.save({
-        "model": model.state_dict(),
+        "model": unwrap(model).state_dict(),
         "optimizer": optimizer.state_dict(),
         "scheduler": scheduler.state_dict(),
         "epoch": epoch,
@@ -153,7 +158,7 @@ if args.resume and os.path.exists(args.checkpoint):
     t0 = time.perf_counter()
 
     checkpoint = torch.load(args.checkpoint, map_location=device)
-    model.load_state_dict(checkpoint["model"])
+    unwrap(model).load_state_dict(checkpoint["model"])
     optimizer.load_state_dict(checkpoint["optimizer"])
     scheduler.load_state_dict(checkpoint["scheduler"])
     start_epoch = checkpoint["epoch"]
@@ -175,9 +180,11 @@ with profile(
     record_shapes=True,
 ) as prof:
 
+    eval_overhead = 0.0
+    checkpoint_overhead = 0.0
+
     torch.cuda.synchronize()
-    t0 = time.perf_counter()
-    overhead = 0.0
+    total_t0 = time.perf_counter()
 
     for epoch in range(start_epoch, args.epochs):
         running_loss = torch.zeros((), device=device)
@@ -196,32 +203,42 @@ with profile(
             global_step += 1
             prof.step()
 
-            checkpoint_t0 = time.perf_counter()
             if global_step % args.log_steps == 0:
                 print(f"[epoch {epoch}][step {global_step}/{total_steps}] loss={running_loss.item() / args.log_steps:.4f}")
                 running_loss = torch.zeros((), device=device)
 
             if global_step % args.save_steps == 0:
+                checkpoint_t0 = time.perf_counter()
                 save_checkpoint(epoch, global_step)
-            checkpoint_t1 = time.perf_counter()
-            overhead += checkpoint_t1 - checkpoint_t0
+                checkpoint_t1 = time.perf_counter()
+                checkpoint_overhead += checkpoint_t1 - checkpoint_t0
 
         eval_t0 = time.perf_counter()
         save_checkpoint(epoch + 1, global_step)
         em, f1 = eval_model.evaluate(device, model, val_loader, val_features)
         print(f"[epoch {epoch}] validation EM={em:.4f} F1={f1:.4f}")
         eval_t1 = time.perf_counter()
-        overhead += eval_t1 - eval_t0
+        eval_overhead += eval_t1 - eval_t0
 
     torch.cuda.synchronize()
-    t1 = time.perf_counter()
+    total_t1 = time.perf_counter()
+
+    total_overhead = checkpoint_overhead + eval_overhead
+    total_elapsed_time = t1 - t0
+    training_time = total_elapsed_time - total_overhead
+    print(f"""\
+Total time:          {total_elapsed_time:.4f} s
+Checkpoint overhead: {checkpoint_overhead:.4f} s
+Eval overhead:       {eval_overhead:.4f} s
+Total overhead:      {total_overhead:.4f} s
+Training time:       {training_time:.4f} s""")
+
+    save_t0 = time.perf_counter()
+    torch.save(model.state_dict(), args.model)
+    save_t1 = time.perf_counter()
+    print(f"Final model saved in {save_t1 - save_t0:.4f} s")
 
     print(f"Memory used: {torch.cuda.max_memory_allocated() / 1e9} GB")
     print(prof.key_averages().table(sort_by="cuda_time_total"))
-    prof.export_chrome_trace(args.profiler + "chrome.trace")
-
-
-print(f"Total time: {t1 - t0:.4f}s\nOverhead: {overhead:.4f}s\nTraining time: {t1 - t0 - overhead:.4f}s")
-torch.save(model.state_dict(), args.model)
-print("Final model saved")
+    prof.export_chrome_trace(args.profiler + "_chrome.trace")
 

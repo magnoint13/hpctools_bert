@@ -1,6 +1,6 @@
 #!/bin/env bash
 
-#SBATCH --job-name="big-BERT"
+#SBATCH --job-name="opt_baseline"
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=32
 #SBATCH --time=00:10:00
@@ -17,14 +17,15 @@ mkdir -p $LUSTRE/hpc_tools/bert/models
 mkdir -p $LUSTRE/hpc_tools/bert/checkpoints
 mkdir -p $LUSTRE/hpc_tools/bert/logs
 
-export HF_HOME=$LUSTRE/hpc_tools/bert
+NAME=${SLURM_JOB_NAME:-baseline}
+export HF_HOME=$LUSTRE/hpc_tools/bert/hf_home
 
 # 32 workers might compete with the main task,
 # lower it to 16 to avoid the start overhead.
 python3 train.py --resume --compile="default" \
     --batch-size=128 --epochs=2 --workers=16 \
     --train-subset=10000 --validation-subset=200 \
-    --checkpoint=checkpoints/bit_chk.pt \
-    --model=models/big_model.pt \
-    --profiler=logs/big_baseline
+    --model=$LUSTRE/hpc_tools/bert/models/$NAME.pt \
+    --checkpoint=$LUSTRE/hpc_tools/bert/checkpoints/$NAME.pt \
+    --profiler=$LUSTRE/hpc_tools/bert/logs/$NAME
 

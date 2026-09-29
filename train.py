@@ -237,7 +237,7 @@ with profile(
     total_t1 = time.perf_counter()
 
     total_overhead = checkpoint_overhead + eval_overhead
-    total_elapsed_time = t1 - t0
+    total_elapsed_time = total_t1 - total_t0
     training_time = total_elapsed_time - total_overhead
     print(f"""\
 Total time:          {total_elapsed_time:.4f} s
@@ -247,11 +247,10 @@ Total overhead:      {total_overhead:.4f} s
 Training time:       {training_time:.4f} s""")
 
     save_t0 = time.perf_counter()
-    torch.save(model.state_dict(), args.model)
+    torch.save(unwrap(model).state_dict(), args.model)
     save_t1 = time.perf_counter()
     print(f"Final model saved in {save_t1 - save_t0:.4f} s")
 
     print(f"Memory used: {torch.cuda.max_memory_allocated() / 1e9} GB")
     print(prof.key_averages().table(sort_by="cuda_time_total"))
-    prof.export_chrome_trace(args.profiler + "_chrome.trace")
 

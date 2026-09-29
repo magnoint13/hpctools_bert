@@ -3,7 +3,7 @@
 #SBATCH --job-name="BERT"
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=32
-#SBATCH --time=00:10:00
+#SBATCH --time=00:20:00
 #SBATCH --mem=64G
 #SBATCH --gres=gpu:a100:1
 #SBATCH --output=logs/%x_%j.out
@@ -21,8 +21,8 @@ export HF_HOME=$LUSTRE/hpc_tools/bert/hf_home
 RUN_NAME=$1
 shift
 
-python3 train.py --resume --workers=16 \
-    --epochs=2 --train-subset=10000 --validation-subset=200 \
+python3 train.py --workers=16 \
+    --epochs=4 --train-subset=8192 --validation-subset=128 --save-steps=800 \
     --model=$LUSTRE/hpc_tools/bert/models/${RUN_NAME}.pt \
     --checkpoint=$LUSTRE/hpc_tools/bert/checkpoints/${RUN_NAME}.pt \
     --profiler=$LUSTRE/hpc_tools/bert/logs/${RUN_NAME} \

@@ -1,0 +1,266 @@
+slurmstepd: info: Setting TMPDIR to /scratch/10111213. Previous errors about TMPDIR can be discarded
+cesga/2020 unloaded
+        Preparing the environment for use of the CESGA 2022 software stack.
+        Please rebuild modules cache: module --ignore-cache avail
+     
+cesga/2022 loaded
+python/3.10.8 loaded
+
+The following have been reloaded with a version change:
+  1) cesga/2020 => cesga/2022
+
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/197 [00:00<?, ?it/s]Loading weights:   7%|▋         | 13/197 [00:00<00:01, 128.29it/s]Loading weights:  13%|█▎        | 26/197 [00:00<00:03, 54.02it/s] Loading weights:  17%|█▋        | 34/197 [00:00<00:03, 43.97it/s]Loading weights:  25%|██▌       | 50/197 [00:00<00:02, 53.59it/s]Loading weights:  29%|██▉       | 57/197 [00:01<00:03, 45.07it/s]Loading weights:  39%|███▉      | 77/197 [00:01<00:01, 65.95it/s]Loading weights:  43%|████▎     | 85/197 [00:01<00:01, 65.40it/s]Loading weights:  53%|█████▎    | 105/197 [00:01<00:01, 91.27it/s]Loading weights:  63%|██████▎   | 124/197 [00:01<00:00, 110.42it/s]Loading weights:  75%|███████▍  | 147/197 [00:01<00:00, 128.40it/s]Loading weights: 100%|██████████| 197/197 [00:01<00:00, 107.44it/s]
+[transformers] [1mBertForQuestionAnswering LOAD REPORT[0m from: google-bert/bert-base-uncased
+Key                                        | Status     | 
+-------------------------------------------+------------+-
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED | 
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED | 
+cls.predictions.transform.dense.weight     | UNEXPECTED | 
+cls.seq_relationship.weight                | UNEXPECTED | 
+cls.seq_relationship.bias                  | UNEXPECTED | 
+cls.predictions.bias                       | UNEXPECTED | 
+bert.pooler.dense.bias                     | UNEXPECTED | 
+bert.pooler.dense.weight                   | UNEXPECTED | 
+cls.predictions.transform.dense.bias       | UNEXPECTED | 
+qa_outputs.weight                          | MISSING    | 
+qa_outputs.bias                            | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+Train: 8192 examples | Validation: 128 examples
+Map:   0%|          | 0/8192 [00:00<?, ? examples/s]Map:  12%|█▏        | 1000/8192 [00:22<02:42, 44.13 examples/s]Map:  24%|██▍       | 2000/8192 [00:23<01:01, 100.38 examples/s]Map:  37%|███▋      | 3000/8192 [00:24<00:30, 168.67 examples/s]Map:  49%|████▉     | 4000/8192 [00:25<00:15, 263.41 examples/s]Map:  61%|██████    | 5000/8192 [00:25<00:08, 392.07 examples/s]Map:  73%|███████▎  | 6000/8192 [00:26<00:03, 552.41 examples/s]Map:  85%|████████▌ | 7000/8192 [00:26<00:01, 761.89 examples/s]Map:  98%|█████████▊| 8000/8192 [00:26<00:00, 1018.87 examples/s]Map: 100%|██████████| 8192/8192 [00:26<00:00, 306.53 examples/s] 
+Map:   0%|          | 0/128 [00:00<?, ? examples/s]Map: 100%|██████████| 128/128 [00:00<00:00, 1272.61 examples/s]Map: 100%|██████████| 128/128 [00:00<00:00, 1199.74 examples/s]
+[epoch 0][step 20/2048] loss=5.2208
+[epoch 0][step 40/2048] loss=4.3987
+[epoch 0][step 60/2048] loss=3.9485
+[epoch 0][step 80/2048] loss=3.5542
+[epoch 0][step 100/2048] loss=2.8747
+[epoch 0][step 120/2048] loss=2.5812
+[epoch 0][step 140/2048] loss=2.5890
+[epoch 0][step 160/2048] loss=2.2791
+[epoch 0][step 180/2048] loss=2.2161
+[epoch 0][step 200/2048] loss=2.2651
+[epoch 0][step 220/2048] loss=2.1239
+[epoch 0][step 240/2048] loss=1.8501
+[epoch 0][step 260/2048] loss=1.8232
+[epoch 0][step 280/2048] loss=1.8268
+[epoch 0][step 300/2048] loss=1.8398
+[epoch 0][step 320/2048] loss=1.8420
+[epoch 0][step 340/2048] loss=1.7275
+[epoch 0][step 360/2048] loss=1.6873
+[epoch 0][step 380/2048] loss=1.6973
+[epoch 0][step 400/2048] loss=1.5532
+[epoch 0][step 420/2048] loss=1.6867
+[epoch 0][step 440/2048] loss=1.6578
+[epoch 0][step 460/2048] loss=1.5688
+[epoch 0][step 480/2048] loss=1.4921
+[epoch 0][step 500/2048] loss=1.5340
+Model checkpoint started
+Model checkpoint finished in 11.5115s
+[epoch 0] validation EM=0.5781 F1=0.7253
+[epoch 1][step 520/2048] loss=0.5179
+[epoch 1][step 540/2048] loss=1.1067
+[epoch 1][step 560/2048] loss=1.1859
+[epoch 1][step 580/2048] loss=1.2002
+[epoch 1][step 600/2048] loss=1.1719
+[epoch 1][step 620/2048] loss=1.2246
+[epoch 1][step 640/2048] loss=1.1457
+[epoch 1][step 660/2048] loss=1.1868
+[epoch 1][step 680/2048] loss=1.2143
+[epoch 1][step 700/2048] loss=1.1424
+[epoch 1][step 720/2048] loss=1.2070
+[epoch 1][step 740/2048] loss=1.1068
+[epoch 1][step 760/2048] loss=1.1324
+[epoch 1][step 780/2048] loss=1.0824
+[epoch 1][step 800/2048] loss=1.1892
+Model checkpoint started
+Model checkpoint finished in 1.5613s
+[epoch 1][step 820/2048] loss=1.1832
+[epoch 1][step 840/2048] loss=1.0346
+[epoch 1][step 860/2048] loss=1.1126
+[epoch 1][step 880/2048] loss=1.2174
+[epoch 1][step 900/2048] loss=1.2136
+[epoch 1][step 920/2048] loss=1.0837
+[epoch 1][step 940/2048] loss=0.9849
+[epoch 1][step 960/2048] loss=1.0961
+[epoch 1][step 980/2048] loss=1.0903
+[epoch 1][step 1000/2048] loss=1.2023
+[epoch 1][step 1020/2048] loss=1.1467
+Model checkpoint started
+Model checkpoint finished in 3.5607s
+[epoch 1] validation EM=0.6172 F1=0.7619
+[epoch 2][step 1040/2048] loss=0.6981
+[epoch 2][step 1060/2048] loss=0.8465
+[epoch 2][step 1080/2048] loss=0.8335
+[epoch 2][step 1100/2048] loss=0.8138
+[epoch 2][step 1120/2048] loss=0.7860
+[epoch 2][step 1140/2048] loss=0.8394
+[epoch 2][step 1160/2048] loss=0.7811
+[epoch 2][step 1180/2048] loss=0.7841
+[epoch 2][step 1200/2048] loss=0.7950
+[epoch 2][step 1220/2048] loss=0.7600
+[epoch 2][step 1240/2048] loss=0.8184
+[epoch 2][step 1260/2048] loss=0.7983
+[epoch 2][step 1280/2048] loss=0.7825
+[epoch 2][step 1300/2048] loss=0.8646
+[epoch 2][step 1320/2048] loss=0.7940
+[epoch 2][step 1340/2048] loss=0.8659
+[epoch 2][step 1360/2048] loss=0.7838
+[epoch 2][step 1380/2048] loss=0.7282
+[epoch 2][step 1400/2048] loss=0.8504
+[epoch 2][step 1420/2048] loss=0.7423
+[epoch 2][step 1440/2048] loss=0.8465
+[epoch 2][step 1460/2048] loss=0.7596
+[epoch 2][step 1480/2048] loss=0.7448
+[epoch 2][step 1500/2048] loss=0.8434
+[epoch 2][step 1520/2048] loss=0.8236
+Model checkpoint started
+Model checkpoint finished in 2.3727s
+[epoch 2] validation EM=0.6250 F1=0.7618
+[epoch 3][step 1540/2048] loss=0.1386
+[epoch 3][step 1560/2048] loss=0.6197
+[epoch 3][step 1580/2048] loss=0.6171
+[epoch 3][step 1600/2048] loss=0.6513
+Model checkpoint started
+Model checkpoint finished in 1.5653s
+[epoch 3][step 1620/2048] loss=0.5844
+[epoch 3][step 1640/2048] loss=0.6390
+[epoch 3][step 1660/2048] loss=0.5794
+[epoch 3][step 1680/2048] loss=0.7184
+[epoch 3][step 1700/2048] loss=0.6001
+[epoch 3][step 1720/2048] loss=0.6301
+[epoch 3][step 1740/2048] loss=0.5527
+[epoch 3][step 1760/2048] loss=0.6172
+[epoch 3][step 1780/2048] loss=0.6016
+[epoch 3][step 1800/2048] loss=0.5876
+[epoch 3][step 1820/2048] loss=0.6725
+[epoch 3][step 1840/2048] loss=0.5437
+[epoch 3][step 1860/2048] loss=0.6722
+[epoch 3][step 1880/2048] loss=0.6025
+[epoch 3][step 1900/2048] loss=0.6073
+[epoch 3][step 1920/2048] loss=0.6507
+[epoch 3][step 1940/2048] loss=0.6327
+[epoch 3][step 1960/2048] loss=0.6607
+[epoch 3][step 1980/2048] loss=0.5599
+[epoch 3][step 2000/2048] loss=0.6179
+[epoch 3][step 2020/2048] loss=0.6626
+[epoch 3][step 2040/2048] loss=0.5803
+Model checkpoint started
+Model checkpoint finished in 6.5996s
+[epoch 3] validation EM=0.6406 F1=0.7649
+Total time:          147.7033 s
+Checkpoint overhead: 3.1266 s
+Eval overhead:       27.3194 s
+Total overhead:      30.4460 s
+Training time:       117.2573 s
+Final model saved in 0.4945 s
+Memory used: 4.095864832 GB
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                                   Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg     Self CUDA   Self CUDA %    CUDA total  CUDA time avg    # of Calls  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                          ProfilerStep*         0.00%       0.000us         0.00%       0.000us       0.000us     241.408ms       158.73%     241.408ms      80.469ms             3  
+                              Optimizer.step#AdamW.step         0.00%       0.000us         0.00%       0.000us       0.000us      83.759ms        55.07%      83.759ms      27.920ms             3  
+                                          ProfilerStep*        34.62%     109.311ms        76.66%     242.071ms      80.690ms       0.000us         0.00%      66.137ms      22.046ms             3  
+                                           aten::linear         0.98%       3.097ms        12.56%      39.653ms      90.532us       0.000us         0.00%      42.574ms      97.201us           438  
+    autograd::engine::evaluate_function: AddmmBackward0         0.99%       3.115ms         8.10%      25.566ms     116.739us       0.000us         0.00%      38.470ms     175.663us           219  
+                                         AddmmBackward0         0.64%       2.017ms         5.20%      16.417ms      74.962us       0.000us         0.00%      33.134ms     151.298us           219  
+                                               aten::mm         2.45%       7.722ms         3.65%      11.517ms      26.295us      33.134ms        21.79%      33.134ms      75.649us           438  
+                              Optimizer.step#AdamW.step         9.43%      29.771ms        27.28%      86.139ms      28.713ms       0.000us         0.00%      23.464ms       7.821ms             3  
+autograd::engine::evaluate_function: ScaledDotProduc...         0.17%     547.668us         1.36%       4.281ms     118.921us       0.000us         0.00%      21.262ms     590.611us            36  
+            ScaledDotProductEfficientAttentionBackward0         0.07%     210.717us         1.18%       3.733ms     103.708us       0.000us         0.00%      21.262ms     590.611us            36  
+aten::_scaled_dot_product_efficient_attention_backwa...         0.17%     535.639us         1.12%       3.523ms      97.855us       0.000us         0.00%      21.262ms     590.611us            36  
+                    aten::_efficient_attention_backward         0.24%     769.829us         0.76%       2.409ms      66.925us      20.890ms        13.74%      21.262ms     590.611us            36  
+fmha_cutlassB_bf16_aligned_64x64_k64_dropout_sm80(Py...         0.00%       0.000us         0.00%       0.000us       0.000us      20.890ms        13.74%      20.890ms     580.276us            36  
+                                            aten::addmm         2.03%       6.423ms         2.52%       7.960ms      36.345us      18.727ms        12.31%      18.727ms      85.513us           219  
+ampere_bf16_s16816gemm_bf16_128x256_ldg8_relu_f2f_st...         0.00%       0.000us         0.00%       0.000us       0.000us      13.739ms         9.03%      13.739ms      76.328us           180  
+                                            aten::copy_         2.42%       7.637ms         4.69%      14.811ms       7.874us      13.331ms         8.77%      13.331ms       7.087us          1881  
+                                               aten::to         0.75%       2.359ms         9.97%      31.492ms      16.376us       0.000us         0.00%      13.292ms       6.912us          1923  
+                                         aten::_to_copy         2.58%       8.158ms         9.23%      29.132ms      15.587us       0.000us         0.00%      13.292ms       7.112us          1869  
+autograd::engine::evaluate_function: ToCopyBackward0...         1.18%       3.716ms         5.86%      18.500ms      31.303us       0.000us         0.00%      12.035ms      20.363us           591  
+ampere_bf16_s16816gemm_bf16_128x256_ldg8_f2f_stages_...         0.00%       0.000us         0.00%       0.000us       0.000us       9.211ms         6.06%       9.211ms     127.930us            72  
+                     aten::scaled_dot_product_attention         0.18%     580.502us         1.76%       5.569ms     154.707us       0.000us         0.00%       8.971ms     249.207us            36  
+          aten::_scaled_dot_product_efficient_attention         0.18%     561.052us         0.69%       2.193ms      60.905us       0.000us         0.00%       8.342ms     231.729us            36  
+                     aten::_efficient_attention_forward         0.19%     592.616us         0.41%       1.290ms      35.823us       8.342ms         5.49%       8.342ms     231.729us            36  
+fmha_cutlassF_bf16_aligned_64x64_rf_sm80(PyTorchMemE...         0.00%       0.000us         0.00%       0.000us       0.000us       8.342ms         5.49%       8.342ms     231.729us            36  
+autograd::engine::evaluate_function: NativeLayerNorm...         0.28%     878.765us         1.18%       3.711ms      49.484us       0.000us         0.00%       7.710ms     102.801us            75  
+                               NativeLayerNormBackward0         0.10%     317.789us         0.90%       2.833ms      37.767us       0.000us         0.00%       7.710ms     102.801us            75  
+                       aten::native_layer_norm_backward         0.29%     922.231us         0.80%       2.515ms      33.530us       7.710ms         5.07%       7.710ms     102.801us            75  
+ampere_bf16_s16816gemm_bf16_256x128_ldg8_f2f_stages_...         0.00%       0.000us         0.00%       0.000us       0.000us       7.191ms         4.73%       7.191ms      49.939us           144  
+                                             aten::add_         1.93%       6.107ms         4.33%      13.665ms      10.190us       7.149ms         4.70%       7.149ms       5.331us          1341  
+void at::native::unrolled_elementwise_kernel<at::nat...         0.00%       0.000us         0.00%       0.000us       0.000us       6.965ms         4.58%       6.965ms      11.786us           591  
+                                        ToCopyBackward0         0.30%     953.162us         4.18%      13.215ms      22.360us       0.000us         0.00%       6.951ms      11.762us           591  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us       6.264ms         4.12%       6.264ms       9.448us           663  
+                                             aten::mul_         1.89%       5.981ms         3.66%      11.555ms       9.678us       5.953ms         3.91%       5.953ms       4.986us          1194  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us       5.953ms         3.91%       5.953ms       4.986us          1194  
+ampere_bf16_s16816gemm_bf16_128x256_ldg8_f2f_stages_...         0.00%       0.000us         0.00%       0.000us       0.000us       5.943ms         3.91%       5.943ms     165.088us            36  
+                                              aten::sum         1.11%       3.517ms         1.81%       5.727ms      25.797us       5.396ms         3.55%       5.396ms      24.306us           222  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us       5.207ms         3.42%       5.207ms      34.035us           153  
+void at::native::reduce_kernel<128, 4, at::native::R...         0.00%       0.000us         0.00%       0.000us       0.000us       5.064ms         3.33%       5.064ms      23.445us           216  
+ampere_bf16_s16816gemm_bf16_128x128_ldg8_relu_f2f_st...         0.00%       0.000us         0.00%       0.000us       0.000us       4.950ms         3.25%       4.950ms     137.503us            36  
+ampere_bf16_s16816gemm_bf16_128x128_ldg8_f2f_stages_...         0.00%       0.000us         0.00%       0.000us       0.000us       4.879ms         3.21%       4.879ms      33.885us           144  
+ampere_bf16_s16816gemm_bf16_128x128_ldg8_f2f_stages_...         0.00%       0.000us         0.00%       0.000us       0.000us       4.793ms         3.15%       4.793ms     133.141us            36  
+                                            aten::lerp_         0.96%       3.043ms         1.83%       5.772ms       9.669us       4.318ms         2.84%       4.318ms       7.233us           597  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us       4.318ms         2.84%       4.318ms       7.233us           597  
+void at::native::(anonymous namespace)::GammaBetaBac...         0.00%       0.000us         0.00%       0.000us       0.000us       4.140ms         2.72%       4.140ms      55.197us            75  
+                                         aten::addcdiv_         1.01%       3.195ms         1.85%       5.838ms       9.779us       4.081ms         2.68%       4.081ms       6.836us           597  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us       4.081ms         2.68%       4.081ms       6.836us           597  
+void at::native::(anonymous namespace)::layer_norm_g...         0.00%       0.000us         0.00%       0.000us       0.000us       3.570ms         2.35%       3.570ms      47.604us            75  
+                                              aten::add         0.35%       1.112ms         0.51%       1.614ms      18.547us       3.305ms         2.17%       3.305ms      37.988us            87  
+     autograd::engine::evaluate_function: GeluBackward0         0.08%     262.948us         0.29%     915.552us      25.432us       0.000us         0.00%       3.137ms      87.152us            36  
+                                          GeluBackward0         0.03%     104.341us         0.21%     652.604us      18.128us       0.000us         0.00%       3.137ms      87.152us            36  
+                                    aten::gelu_backward         0.11%     342.498us         0.17%     548.263us      15.230us       3.137ms         2.06%       3.137ms      87.152us            36  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us       3.137ms         2.06%       3.137ms      87.152us            36  
+void at::native::unrolled_elementwise_kernel<at::nat...         0.00%       0.000us         0.00%       0.000us       0.000us       3.083ms         2.03%       3.083ms      42.813us            72  
+                                         aten::addcmul_         0.97%       3.071ms         1.89%       5.972ms      10.003us       2.667ms         1.75%       2.669ms       4.470us           597  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us       2.667ms         1.75%       2.667ms       4.467us           597  
+                                       aten::layer_norm         0.10%     313.683us         1.04%       3.285ms      43.795us       0.000us         0.00%       2.629ms      35.059us            75  
+                                aten::native_layer_norm         0.45%       1.428ms         0.94%       2.971ms      39.612us       2.629ms         1.73%       2.629ms      35.059us            75  
+void at::native::(anonymous namespace)::vectorized_l...         0.00%       0.000us         0.00%       0.000us       0.000us       2.629ms         1.73%       2.629ms      35.059us            75  
+                                             aten::sqrt         1.40%       4.424ms         2.28%       7.203ms      12.065us       2.272ms         1.49%       2.272ms       3.805us           597  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us       2.272ms         1.49%       2.272ms       3.805us           597  
+                                             aten::gelu         0.15%     471.138us         0.22%     699.490us      19.430us       2.131ms         1.40%       2.131ms      59.181us            36  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us       2.131ms         1.40%       2.131ms      59.181us            36  
+                                              aten::div         1.42%       4.487ms         2.26%       7.134ms      11.831us       2.121ms         1.39%       2.121ms       3.518us           603  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us       2.121ms         1.39%       2.121ms       3.518us           603  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us       2.060ms         1.35%       2.060ms       3.451us           597  
+                                          aten::dropout         0.05%     172.184us         0.95%       2.985ms      39.795us       0.000us         0.00%       1.360ms      18.133us            75  
+                                   aten::native_dropout         0.39%       1.220ms         0.89%       2.812ms      37.499us       1.360ms         0.89%       1.360ms      18.133us            75  
+autograd::engine::evaluate_function: EmbeddingBackwa...         0.02%      56.449us         0.58%       1.827ms     203.013us       0.000us         0.00%       1.335ms     148.279us             9  
+                                     EmbeddingBackward0         0.01%      20.763us         0.56%       1.771ms     196.741us       0.000us         0.00%       1.335ms     148.279us             9  
+                               aten::embedding_backward         0.01%      18.056us         0.55%       1.750ms     194.434us       0.000us         0.00%       1.335ms     148.279us             9  
+                         aten::embedding_dense_backward         0.16%     515.498us         0.55%       1.732ms     192.427us       1.139ms         0.75%       1.335ms     148.279us             9  
+void at::native::(anonymous namespace)::fused_dropou...         0.00%       0.000us         0.00%       0.000us       0.000us       1.272ms         0.84%       1.272ms      17.670us            72  
+      autograd::engine::evaluate_function: AddBackward0         0.17%     521.048us         0.70%       2.210ms      27.286us       0.000us         0.00%       1.192ms      14.718us            81  
+                                            aten::where         0.22%     687.738us         0.83%       2.613ms      36.296us     508.995us         0.33%       1.071ms      14.877us            72  
+void cublasLt::splitKreduce_kernel<32, 16, int, __nv...         0.00%       0.000us         0.00%       0.000us       0.000us     929.998us         0.61%     929.998us       6.327us           147  
+autograd::engine::evaluate_function: NativeDropoutBa...         0.14%     451.416us         0.67%       2.110ms      28.135us       0.000us         0.00%     755.880us      10.078us            75  
+                                 NativeDropoutBackward0         0.06%     182.733us         0.53%       1.659ms      22.117us       0.000us         0.00%     755.880us      10.078us            75  
+                          aten::native_dropout_backward         0.19%     591.725us         0.47%       1.476ms      19.680us     755.880us         0.50%     755.880us      10.078us            75  
+                                            aten::fill_         0.23%     719.248us         0.49%       1.537ms      11.913us     695.586us         0.46%     695.586us       5.392us           129  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us     680.935us         0.45%     680.935us       9.457us            72  
+                                            aten::zero_         0.05%     162.223us         0.23%     740.659us      14.523us       0.000us         0.00%     566.727us      11.112us            51  
+void at::native::elementwise_kernel<128, 4, at::nati...         0.00%       0.000us         0.00%       0.000us       0.000us     508.995us         0.33%     508.995us      14.139us            36  
+void at_cuda_detail::cub::DeviceRadixSortOnesweepKer...         0.00%       0.000us         0.00%       0.000us       0.000us     456.003us         0.30%     456.003us       9.500us            48  
+                                        Memset (Device)         0.00%       0.000us         0.00%       0.000us       0.000us     430.347us         0.28%     430.347us       1.237us           348  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us     372.036us         0.24%     372.036us      10.334us            36  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us     198.915us         0.13%     198.915us      11.051us            18  
+void at::native::(anonymous namespace)::compute_grad...         0.00%       0.000us         0.00%       0.000us       0.000us     194.595us         0.13%     194.595us      32.432us             6  
+                                            aten::zeros         0.01%      28.703us         0.05%     171.442us      19.049us       0.000us         0.00%     184.066us      20.452us             9  
+void at::native::(anonymous namespace)::sum_and_scat...         0.00%       0.000us         0.00%       0.000us       0.000us     174.496us         0.11%     174.496us      29.083us             6  
+                                    aten::scalar_tensor         0.13%     395.657us         0.50%       1.579ms      10.963us       0.000us         0.00%     120.219us       0.835us           144  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us     120.219us         0.08%     120.219us       1.670us            72  
+                                        aten::embedding         0.03%      79.909us         0.17%     548.382us      60.931us       0.000us         0.00%     116.896us      12.988us             9  
+                                     aten::index_select         0.04%     120.941us         0.14%     435.046us      48.338us       0.000us         0.00%     116.896us      12.988us             9  
+                                           aten::gather         0.04%     112.615us         0.07%     212.681us      23.631us     116.896us         0.08%     116.896us      12.988us             9  
+void at::native::vectorized_gather_kernel<16, long>(...         0.00%       0.000us         0.00%       0.000us       0.000us     116.896us         0.08%     116.896us      12.988us             9  
+void at::native::elementwise_kernel<128, 2, at::nati...         0.00%       0.000us         0.00%       0.000us       0.000us      92.801us         0.06%      92.801us      30.934us             3  
+void at::native::(anonymous namespace)::fused_dropou...         0.00%       0.000us         0.00%       0.000us       0.000us      87.680us         0.06%      87.680us      29.227us             3  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us      74.945us         0.05%      74.945us      24.982us             3  
+                               aten::cross_entropy_loss         0.01%      21.329us         0.15%     472.928us      78.821us       0.000us         0.00%      61.732us      10.289us             6  
+                                           aten::arange         0.05%     167.904us         0.19%     611.659us      16.991us      30.559us         0.02%      61.118us       1.698us            36  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 315.762ms
+Self CUDA time total: 152.091ms
+

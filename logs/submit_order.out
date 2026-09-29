@@ -1,0 +1,27 @@
+sbatch: slurm_job_submit: Job assigned to GPU nodes: gres:gpu:a100:1
+sbatch: slurm_job_submit: setting QoS to Partition QoS value: short
+Submitted batch job 10111211
+sbatch: slurm_job_submit: Job assigned to GPU nodes: gres:gpu:a100:1
+sbatch: slurm_job_submit: setting QoS to Partition QoS value: short
+Submitted batch job 10111212
+sbatch: slurm_job_submit: Job assigned to GPU nodes: gres:gpu:a100:1
+sbatch: slurm_job_submit: setting QoS to Partition QoS value: short
+Submitted batch job 10111213
+sbatch: slurm_job_submit: Job assigned to GPU nodes: gres:gpu:a100:1
+sbatch: slurm_job_submit: setting QoS to Partition QoS value: short
+Submitted batch job 10111214
+sbatch: slurm_job_submit: Job assigned to GPU nodes: gres:gpu:a100:1
+sbatch: slurm_job_submit: setting QoS to Partition QoS value: short
+Submitted batch job 10111215
+sbatch: slurm_job_submit: Job assigned to GPU nodes: gres:gpu:a100:1
+sbatch: slurm_job_submit: setting QoS to Partition QoS value: short
+Submitted batch job 10111216
+sbatch: slurm_job_submit: Job assigned to GPU nodes: gres:gpu:a100:1
+sbatch: slurm_job_submit: setting QoS to Partition QoS value: short
+Submitted batch job 10111217
+sbatch: slurm_job_submit: Job assigned to GPU nodes: gres:gpu:a100:1
+sbatch: slurm_job_submit: setting QoS to Partition QoS value: short
+Submitted batch job 10111218
+sbatch: slurm_job_submit: Job assigned to GPU nodes: gres:gpu:a100:1
+sbatch: slurm_job_submit: setting QoS to Partition QoS value: short
+Submitted batch job 10111219

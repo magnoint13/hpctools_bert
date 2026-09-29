@@ -1,0 +1,270 @@
+slurmstepd: info: Setting TMPDIR to /scratch/10111214. Previous errors about TMPDIR can be discarded
+cesga/2020 unloaded
+        Preparing the environment for use of the CESGA 2022 software stack.
+        Please rebuild modules cache: module --ignore-cache avail
+     
+cesga/2022 loaded
+python/3.10.8 loaded
+
+The following have been reloaded with a version change:
+  1) cesga/2020 => cesga/2022
+
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/197 [00:00<?, ?it/s]Loading weights: 100%|██████████| 197/197 [00:00<00:00, 7561.04it/s]
+[transformers] [1mBertForQuestionAnswering LOAD REPORT[0m from: google-bert/bert-base-uncased
+Key                                        | Status     | 
+-------------------------------------------+------------+-
+cls.predictions.bias                       | UNEXPECTED | 
+cls.predictions.transform.dense.bias       | UNEXPECTED | 
+cls.predictions.transform.dense.weight     | UNEXPECTED | 
+bert.pooler.dense.bias                     | UNEXPECTED | 
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED | 
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED | 
+cls.seq_relationship.weight                | UNEXPECTED | 
+bert.pooler.dense.weight                   | UNEXPECTED | 
+cls.seq_relationship.bias                  | UNEXPECTED | 
+qa_outputs.weight                          | MISSING    | 
+qa_outputs.bias                            | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+Model compilation started
+Model compilation finished in 5.0817s
+Train: 8192 examples | Validation: 128 examples
+Map:   0%|          | 0/8192 [00:00<?, ? examples/s]Map:  12%|█▏        | 1000/8192 [00:18<02:10, 55.16 examples/s]Map:  24%|██▍       | 2000/8192 [00:19<00:49, 124.57 examples/s]Map:  37%|███▋      | 3000/8192 [00:20<00:25, 202.70 examples/s]Map:  49%|████▉     | 4000/8192 [00:20<00:13, 313.02 examples/s]Map:  61%|██████    | 5000/8192 [00:21<00:06, 461.94 examples/s]Map:  73%|███████▎  | 6000/8192 [00:21<00:03, 643.43 examples/s]Map:  85%|████████▌ | 7000/8192 [00:21<00:01, 876.42 examples/s]Map:  98%|█████████▊| 8000/8192 [00:22<00:00, 1158.55 examples/s]Map: 100%|██████████| 8192/8192 [00:22<00:00, 369.07 examples/s] 
+Map:   0%|          | 0/128 [00:00<?, ? examples/s]Map: 100%|██████████| 128/128 [00:00<00:00, 1202.20 examples/s]Map: 100%|██████████| 128/128 [00:00<00:00, 1124.90 examples/s]
+/mnt/netapp2/Store_uni/home/ulc/cursos/curso375/hpc_tools/bert/lib/python3.10/site-packages/torch/_inductor/compile_fx.py:282: UserWarning: TensorFloat32 tensor cores for float32 matrix multiplication available but not enabled. Consider setting `torch.set_float32_matmul_precision('high')` for better performance.
+  warnings.warn(
+[epoch 0][step 20/2048] loss=5.4429
+[epoch 0][step 40/2048] loss=4.4922
+[epoch 0][step 60/2048] loss=3.9751
+[epoch 0][step 80/2048] loss=3.6885
+[epoch 0][step 100/2048] loss=3.0856
+[epoch 0][step 120/2048] loss=2.8768
+[epoch 0][step 140/2048] loss=2.3861
+[epoch 0][step 160/2048] loss=2.0857
+[epoch 0][step 180/2048] loss=2.0487
+[epoch 0][step 200/2048] loss=2.0955
+[epoch 0][step 220/2048] loss=1.9985
+[epoch 0][step 240/2048] loss=1.9471
+[epoch 0][step 260/2048] loss=1.7990
+[epoch 0][step 280/2048] loss=1.6722
+[epoch 0][step 300/2048] loss=1.8498
+[epoch 0][step 320/2048] loss=1.6960
+[epoch 0][step 340/2048] loss=1.9052
+[epoch 0][step 360/2048] loss=1.7497
+[epoch 0][step 380/2048] loss=1.7804
+[epoch 0][step 400/2048] loss=1.5162
+[epoch 0][step 420/2048] loss=1.3901
+[epoch 0][step 440/2048] loss=1.6004
+[epoch 0][step 460/2048] loss=1.6536
+[epoch 0][step 480/2048] loss=1.6397
+[epoch 0][step 500/2048] loss=1.6094
+Model checkpoint started
+Model checkpoint finished in 1.7346s
+[epoch 0] validation EM=0.6250 F1=0.7592
+[epoch 1][step 520/2048] loss=0.4654
+[epoch 1][step 540/2048] loss=1.1163
+[epoch 1][step 560/2048] loss=1.1050
+[epoch 1][step 580/2048] loss=1.1993
+[epoch 1][step 600/2048] loss=1.1856
+[epoch 1][step 620/2048] loss=1.2696
+[epoch 1][step 640/2048] loss=1.1720
+[epoch 1][step 660/2048] loss=1.2474
+[epoch 1][step 680/2048] loss=1.2136
+[epoch 1][step 700/2048] loss=1.2350
+[epoch 1][step 720/2048] loss=1.2356
+[epoch 1][step 740/2048] loss=1.1943
+[epoch 1][step 760/2048] loss=1.1815
+[epoch 1][step 780/2048] loss=1.1574
+[epoch 1][step 800/2048] loss=0.9705
+Model checkpoint started
+Model checkpoint finished in 1.4878s
+[epoch 1][step 820/2048] loss=1.1934
+[epoch 1][step 840/2048] loss=1.0861
+[epoch 1][step 860/2048] loss=1.0916
+[epoch 1][step 880/2048] loss=1.1358
+[epoch 1][step 900/2048] loss=1.0552
+[epoch 1][step 920/2048] loss=1.2841
+[epoch 1][step 940/2048] loss=1.0529
+[epoch 1][step 960/2048] loss=1.1118
+[epoch 1][step 980/2048] loss=1.1992
+[epoch 1][step 1000/2048] loss=1.0213
+[epoch 1][step 1020/2048] loss=1.1645
+Model checkpoint started
+Model checkpoint finished in 1.5211s
+[epoch 1] validation EM=0.6172 F1=0.7538
+[epoch 2][step 1040/2048] loss=0.6350
+[epoch 2][step 1060/2048] loss=0.8988
+[epoch 2][step 1080/2048] loss=0.7598
+[epoch 2][step 1100/2048] loss=0.7859
+[epoch 2][step 1120/2048] loss=0.6872
+[epoch 2][step 1140/2048] loss=0.8701
+[epoch 2][step 1160/2048] loss=0.7479
+[epoch 2][step 1180/2048] loss=0.8286
+[epoch 2][step 1200/2048] loss=0.8200
+[epoch 2][step 1220/2048] loss=0.8425
+[epoch 2][step 1240/2048] loss=0.8115
+[epoch 2][step 1260/2048] loss=0.7391
+[epoch 2][step 1280/2048] loss=0.7334
+[epoch 2][step 1300/2048] loss=0.9365
+[epoch 2][step 1320/2048] loss=0.8219
+[epoch 2][step 1340/2048] loss=0.8190
+[epoch 2][step 1360/2048] loss=0.7487
+[epoch 2][step 1380/2048] loss=0.8433
+[epoch 2][step 1400/2048] loss=0.9245
+[epoch 2][step 1420/2048] loss=0.7917
+[epoch 2][step 1440/2048] loss=0.8900
+[epoch 2][step 1460/2048] loss=0.8513
+[epoch 2][step 1480/2048] loss=0.8703
+[epoch 2][step 1500/2048] loss=0.7831
+[epoch 2][step 1520/2048] loss=0.9066
+Model checkpoint started
+Model checkpoint finished in 1.6133s
+[epoch 2] validation EM=0.6406 F1=0.7788
+[epoch 3][step 1540/2048] loss=0.1582
+[epoch 3][step 1560/2048] loss=0.6076
+[epoch 3][step 1580/2048] loss=0.6040
+[epoch 3][step 1600/2048] loss=0.7161
+Model checkpoint started
+Model checkpoint finished in 1.5839s
+[epoch 3][step 1620/2048] loss=0.6163
+[epoch 3][step 1640/2048] loss=0.5795
+[epoch 3][step 1660/2048] loss=0.5738
+[epoch 3][step 1680/2048] loss=0.6392
+[epoch 3][step 1700/2048] loss=0.6334
+[epoch 3][step 1720/2048] loss=0.6484
+[epoch 3][step 1740/2048] loss=0.6776
+[epoch 3][step 1760/2048] loss=0.6417
+[epoch 3][step 1780/2048] loss=0.5599
+[epoch 3][step 1800/2048] loss=0.6724
+[epoch 3][step 1820/2048] loss=0.5939
+[epoch 3][step 1840/2048] loss=0.6657
+[epoch 3][step 1860/2048] loss=0.6639
+[epoch 3][step 1880/2048] loss=0.5861
+[epoch 3][step 1900/2048] loss=0.7201
+[epoch 3][step 1920/2048] loss=0.7288
+[epoch 3][step 1940/2048] loss=0.5828
+[epoch 3][step 1960/2048] loss=0.5640
+[epoch 3][step 1980/2048] loss=0.5660
+[epoch 3][step 2000/2048] loss=0.6044
+[epoch 3][step 2020/2048] loss=0.6425
+[epoch 3][step 2040/2048] loss=0.6480
+Model checkpoint started
+Model checkpoint finished in 1.4895s
+[epoch 3] validation EM=0.6562 F1=0.7893
+Total time:          543.1512 s
+Checkpoint overhead: 3.0718 s
+Eval overhead:       17.7035 s
+Total overhead:      20.7753 s
+Training time:       522.3759 s
+Final model saved in 0.4804 s
+Memory used: 5.141357056 GB
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                                   Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg     Self CUDA   Self CUDA %    CUDA total  CUDA time avg    # of Calls  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                          ProfilerStep*         0.00%       0.000us         0.00%       0.000us       0.000us     713.126ms       102.09%     713.126ms     237.709ms             3  
+                                               aten::mm         0.88%       6.786ms         1.31%      10.097ms      19.682us     465.693ms        66.67%     465.693ms     907.784us           513  
+autograd::engine::evaluate_function: CompiledFunctio...         0.05%     376.982us         6.86%      52.868ms      17.623ms       0.000us         0.00%     453.998ms     151.333ms             3  
+                               CompiledFunctionBackward         3.22%      24.805ms         6.81%      52.491ms      17.497ms       0.000us         0.00%     453.998ms     151.333ms             3  
+                                          ProfilerStep*         8.01%      61.797ms        92.60%     714.062ms     238.021ms       0.000us         0.00%     248.532ms      82.844ms             3  
+                             Torch-Compiled Region: 0/0         0.09%     701.103us         2.96%      22.803ms       7.601ms       0.000us         0.00%     219.995ms      73.332ms             3  
+                                       CompiledFunction         1.47%      11.308ms         2.85%      21.951ms       7.317ms       0.000us         0.00%     219.995ms      73.332ms             3  
+                        ampere_sgemm_64x32_sliced1x4_nt         0.00%       0.000us         0.00%       0.000us       0.000us     136.577ms        19.55%     136.577ms     758.759us           180  
+                                 ampere_sgemm_128x32_nn         0.00%       0.000us         0.00%       0.000us       0.000us     127.378ms        18.23%     127.378ms     696.055us           183  
+                                            aten::addmm         0.31%       2.419ms         0.42%       3.265ms      22.677us     111.057ms        15.90%     111.057ms     771.226us           144  
+                                 ampere_sgemm_128x64_tn         0.00%       0.000us         0.00%       0.000us       0.000us      76.993ms        11.02%      76.993ms       1.069ms            72  
+                                 ampere_sgemm_32x128_tn         0.00%       0.000us         0.00%       0.000us       0.000us      64.903ms         9.29%      64.903ms       1.803ms            36  
+                                 ampere_sgemm_128x64_nn         0.00%       0.000us         0.00%       0.000us       0.000us      61.447ms         8.80%      61.447ms       1.707ms            36  
+                                ampere_sgemm_128x128_nt         0.00%       0.000us         0.00%       0.000us       0.000us      59.269ms         8.48%      59.269ms       1.646ms            36  
+                                 ampere_sgemm_128x32_tn         0.00%       0.000us         0.00%       0.000us       0.000us      49.827ms         7.13%      49.827ms     461.363us           108  
+aten::_scaled_dot_product_efficient_attention_backwa...         0.07%     503.338us         0.77%       5.964ms     165.664us       0.000us         0.00%      45.806ms       1.272ms            36  
+                    aten::_efficient_attention_backward         0.14%       1.051ms         0.62%       4.765ms     132.373us      42.591ms         6.10%      45.806ms       1.272ms            36  
+fmha_cutlassB_f32_aligned_64x64_k64_dropout_sm80(PyT...         0.00%       0.000us         0.00%       0.000us       0.000us      42.591ms         6.10%      42.591ms       1.183ms            36  
+                              Optimizer.step#AdamW.step         0.00%       0.000us         0.00%       0.000us       0.000us      32.723ms         4.68%      32.723ms      10.908ms             3  
+                              Optimizer.step#AdamW.step         3.76%      29.013ms        81.30%     626.892ms     208.964ms       0.000us         0.00%      28.477ms       9.492ms             3  
+          aten::_scaled_dot_product_efficient_attention         0.05%     387.951us         0.29%       2.241ms      62.244us       0.000us         0.00%      19.566ms     543.500us            36  
+                     aten::_efficient_attention_forward         0.08%     646.166us         0.18%       1.426ms      39.600us      19.566ms         2.80%      19.566ms     543.500us            36  
+fmha_cutlassF_f32_aligned_64x64_rf_sm80(PyTorchMemEf...         0.00%       0.000us         0.00%       0.000us       0.000us      19.566ms         2.80%      19.566ms     543.500us            36  
+                                             aten::mul_         0.77%       5.973ms        18.03%     139.032ms     116.442us       6.073ms         0.87%       7.160ms       5.997us          1194  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us       6.181ms         0.88%       6.181ms       5.075us          1218  
+                 triton_poi_fused_gelu_gelu_backward_12         0.05%     411.635us         0.08%     603.536us      16.765us       5.998ms         0.86%       5.998ms     166.614us            36  
+                 triton_poi_fused_gelu_gelu_backward_12         0.00%       0.000us         0.00%       0.000us       0.000us       5.998ms         0.86%       5.998ms     166.614us            36  
+                                            aten::lerp_         0.39%       3.041ms         8.33%      64.231ms     107.589us       4.372ms         0.63%       5.212ms       8.731us           597  
+                                         aten::addcdiv_         0.41%       3.199ms         9.26%      71.380ms     119.564us       4.153ms         0.59%       4.937ms       8.270us           597  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us       4.448ms         0.64%       4.448ms       7.304us           609  
+                                       cudaLaunchKernel         3.42%      26.387ms        73.63%     567.770ms     100.242us       0.000us         0.00%       4.416ms       0.780us          5664  
+                                    Command Buffer Full        70.21%     541.383ms        70.21%     541.383ms     545.199us       4.416ms         0.63%       4.416ms       4.447us           993  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us       4.230ms         0.61%       4.230ms       6.934us           610  
+triton_per_fused_add_native_dropout_native_layer_nor...         0.20%       1.519ms         0.25%       1.932ms      28.000us       4.154ms         0.59%       4.154ms      60.207us            69  
+triton_per_fused_add_native_dropout_native_layer_nor...         0.00%       0.000us         0.00%       0.000us       0.000us       4.154ms         0.59%       4.154ms      60.207us            69  
+                                triton_poi_fused_gelu_3         0.06%     488.219us         0.09%     699.966us      19.443us       3.915ms         0.56%       3.915ms     108.757us            36  
+                                triton_poi_fused_gelu_3         0.00%       0.000us         0.00%       0.000us       0.000us       3.915ms         0.56%       3.915ms     108.757us            36  
+                                         aten::addcmul_         0.41%       3.141ms         9.95%      76.755ms     128.568us       2.765ms         0.40%       3.264ms       5.467us           597  
+triton_per_fused_add_native_dropout_backward_native_...         0.07%     534.258us         0.09%     703.849us      21.329us       3.232ms         0.46%       3.232ms      97.942us            33  
+triton_per_fused_add_native_dropout_backward_native_...         0.00%       0.000us         0.00%       0.000us       0.000us       3.232ms         0.46%       3.232ms      97.942us            33  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us       2.811ms         0.40%       2.811ms       4.609us           610  
+                                triton_red_fused_sum_11         0.25%       1.952ms         0.37%       2.838ms      15.765us       2.787ms         0.40%       2.787ms      15.482us           180  
+                                triton_red_fused_sum_11         0.00%       0.000us         0.00%       0.000us       0.000us       2.787ms         0.40%       2.787ms      15.482us           180  
+                                             aten::sqrt         0.58%       4.502ms         9.97%      76.882ms     128.780us       2.374ms         0.34%       2.779ms       4.655us           597  
+                                              aten::div         0.58%       4.500ms        11.11%      85.671ms     143.503us       2.188ms         0.31%       2.574ms       4.312us           597  
+                                             aten::add_         0.69%       5.304ms        10.78%      83.150ms      69.465us       2.143ms         0.31%       2.558ms       2.137us          1197  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us       2.416ms         0.35%       2.416ms       3.960us           610  
+     triton_red_fused_add_native_layer_norm_backward_17         0.08%     585.640us         0.10%     766.548us      23.229us       2.377ms         0.34%       2.377ms      72.031us            33  
+     triton_red_fused_add_native_layer_norm_backward_17         0.00%       0.000us         0.00%       0.000us       0.000us       2.377ms         0.34%       2.377ms      72.031us            33  
+triton_per_fused_add_native_dropout_backward_native_...         0.07%     511.160us         0.09%     697.487us      19.375us       2.245ms         0.32%       2.245ms      62.371us            36  
+triton_per_fused_add_native_dropout_backward_native_...         0.00%       0.000us         0.00%       0.000us       0.000us       2.245ms         0.32%       2.245ms      62.371us            36  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us       2.226ms         0.32%       2.226ms       3.649us           610  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us       2.174ms         0.31%       2.174ms       3.564us           610  
+                                triton_red_fused_sum_13         0.06%     439.625us         0.08%     627.985us      17.444us       1.939ms         0.28%       1.939ms      53.868us            36  
+                                triton_red_fused_sum_13         0.00%       0.000us         0.00%       0.000us       0.000us       1.939ms         0.28%       1.939ms      53.868us            36  
+     triton_red_fused_add_native_layer_norm_backward_15         0.06%     474.096us         0.08%     655.122us      18.198us       1.610ms         0.23%       1.610ms      44.714us            36  
+     triton_red_fused_add_native_layer_norm_backward_15         0.00%       0.000us         0.00%       0.000us       0.000us       1.610ms         0.23%       1.610ms      44.714us            36  
+                                              aten::mul         0.05%     390.939us         0.08%     645.458us      17.929us       1.467ms         0.21%       1.467ms      40.744us            36  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us       1.467ms         0.21%       1.467ms      40.744us            36  
+triton_per_fused_add_embedding_dense_backward_native...         0.01%      63.308us         0.01%      80.539us      26.846us       1.261ms         0.18%       1.261ms     420.483us             3  
+triton_per_fused_add_embedding_dense_backward_native...         0.00%       0.000us         0.00%       0.000us       0.000us       1.261ms         0.18%       1.261ms     420.483us             3  
+                                              aten::sum         0.07%     525.875us         0.09%     731.918us      20.331us       1.235ms         0.18%       1.235ms      34.302us            36  
+void at::native::reduce_kernel<512, 1, at::native::R...         0.00%       0.000us         0.00%       0.000us       0.000us       1.235ms         0.18%       1.235ms      34.302us            36  
+          triton_per_fused_native_layer_norm_backward_9         0.42%       3.216ms         0.62%       4.796ms      14.533us       1.065ms         0.15%       1.065ms       3.228us           330  
+          triton_per_fused_native_layer_norm_backward_9         0.00%       0.000us         0.00%       0.000us       0.000us       1.065ms         0.15%       1.065ms       3.228us           330  
+                                            aten::fill_         0.03%     229.566us         0.07%     506.163us      11.248us     378.945us         0.05%     378.945us       8.421us            45  
+                                            aten::zero_         0.02%     142.846us         0.07%     576.292us      13.721us       0.000us         0.00%     374.176us       8.909us            42  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us     362.498us         0.05%     362.498us      10.069us            36  
+triton_per_fused_add_embedding_native_dropout_native...         0.01%      99.727us         0.02%     124.591us      41.530us     203.426us         0.03%     203.426us      67.809us             3  
+triton_per_fused_add_embedding_native_dropout_native...         0.00%       0.000us         0.00%       0.000us       0.000us     203.426us         0.03%     203.426us      67.809us             3  
+                                            aten::copy_         0.16%       1.236ms         0.20%       1.513ms       2.335us     199.872us         0.03%     199.872us       0.308us           648  
+                                triton_per_fused_sum_14         0.06%     442.984us         0.08%     634.146us      17.615us     183.141us         0.03%     183.141us       5.087us            36  
+                                triton_per_fused_sum_14         0.00%       0.000us         0.00%       0.000us       0.000us     183.141us         0.03%     183.141us       5.087us            36  
+triton_per_fused_add_native_dropout_native_layer_nor...         0.01%      76.899us         0.01%      96.578us      32.193us     179.937us         0.03%     179.937us      59.979us             3  
+triton_per_fused_add_native_dropout_native_layer_nor...         0.00%       0.000us         0.00%       0.000us       0.000us     179.937us         0.03%     179.937us      59.979us             3  
+           triton_poi_fused_embedding_dense_backward_19         0.00%      36.659us         0.01%      54.270us      18.090us     178.304us         0.03%     178.304us      59.435us             3  
+           triton_poi_fused_embedding_dense_backward_19         0.00%       0.000us         0.00%       0.000us       0.000us     178.304us         0.03%     178.304us      59.435us             3  
+          triton_red_fused_native_layer_norm_backward_8         0.01%      79.811us         0.01%     112.757us      18.793us     157.631us         0.02%     157.631us      26.272us             6  
+          triton_red_fused_native_layer_norm_backward_8         0.00%       0.000us         0.00%       0.000us       0.000us     157.631us         0.02%     157.631us      26.272us             6  
+triton_per_fused_native_dropout_backward_native_laye...         0.01%      43.562us         0.01%      59.589us      19.863us     157.473us         0.02%     157.473us      52.491us             3  
+triton_per_fused_native_dropout_backward_native_laye...         0.00%       0.000us         0.00%       0.000us       0.000us     157.473us         0.02%     157.473us      52.491us             3  
+                                       aten::contiguous         0.01%      49.098us         0.11%     832.739us      23.132us       0.000us         0.00%     151.233us       4.201us            36  
+                                            aten::clone         0.01%     111.652us         0.10%     783.641us      21.768us       0.000us         0.00%     151.233us       4.201us            36  
+void at::native::elementwise_kernel<128, 2, at::nati...         0.00%       0.000us         0.00%       0.000us       0.000us     151.233us         0.02%     151.233us       4.201us            36  
+                        ampere_sgemm_32x32_sliced1x4_tn         0.00%       0.000us         0.00%       0.000us       0.000us     128.289us         0.02%     128.289us      42.763us             3  
+                                        Memset (Device)         0.00%       0.000us         0.00%       0.000us       0.000us     117.348us         0.02%     117.348us       1.630us            72  
+void cutlass::Kernel2<cutlass_80_simt_sgemm_128x32_8...         0.00%       0.000us         0.00%       0.000us       0.000us      96.417us         0.01%      96.417us      32.139us             3  
+triton_per_fused_embedding_dense_backward_scalar_ten...         0.00%      33.217us         0.01%      48.389us      16.130us      70.432us         0.01%      70.432us      23.477us             3  
+triton_per_fused_embedding_dense_backward_scalar_ten...         0.00%       0.000us         0.00%       0.000us       0.000us      70.432us         0.01%      70.432us      23.477us             3  
+                                               aten::to         0.09%     719.391us         0.60%       4.628ms       6.767us       0.000us         0.00%      48.639us       0.071us           684  
+                                         aten::_to_copy         0.28%       2.126ms         0.51%       3.909ms       6.387us       0.000us         0.00%      48.639us       0.079us           612  
+                         Memcpy HtoD (Pinned -> Device)         0.00%       0.000us         0.00%       0.000us       0.000us      48.639us         0.01%      48.639us       3.243us            15  
+                 triton_poi_fused_scalar_tensor_where_1         0.01%      55.542us         0.01%      74.936us      24.979us      29.375us         0.00%      29.375us       9.792us             3  
+                 triton_poi_fused_scalar_tensor_where_1         0.00%       0.000us         0.00%       0.000us       0.000us      29.375us         0.00%      29.375us       9.792us             3  
+                                 triton_red_fused_sum_5         0.01%      40.687us         0.01%      58.697us      19.566us      16.448us         0.00%      16.448us       5.483us             3  
+                                 triton_red_fused_sum_5         0.00%       0.000us         0.00%       0.000us       0.000us      16.448us         0.00%      16.448us       5.483us             3  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us      16.447us         0.00%      16.447us       1.827us             9  
+triton_per_fused__log_softmax__log_softmax_backward_...         0.01%      93.206us         0.02%     124.841us      20.807us      15.583us         0.00%      15.583us       2.597us             6  
+triton_per_fused__log_softmax__log_softmax_backward_...         0.00%       0.000us         0.00%       0.000us       0.000us      15.583us         0.00%      15.583us       2.597us             6  
+void cublasLt::splitKreduce_kernel<32, 16, int, floa...         0.00%       0.000us         0.00%       0.000us       0.000us      13.952us         0.00%      13.952us       4.651us             3  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 771.109ms
+Self CUDA time total: 698.541ms
+

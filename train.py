@@ -40,7 +40,7 @@ parser.add_argument("-v", "--validation-subset", type=int, default=None)
 parser.add_argument("-l", "--log-steps", type=int, default=20)
 parser.add_argument("-s", "--save-steps", type=int, default=200)
 
-parser.add_argument("-p", "--profiler", type=str, default="./log/baseline2")
+parser.add_argument("-p", "--profiler", type=str, default="./log/baseline")
 parser.add_argument("--checkpoint", type=str, default="checkpoints/checkpoint.pt")
 parser.add_argument("--model", type=str, default="checkpoints/model.pt")
 parser.add_argument("-r", "--resume", action="store_true", default=False)

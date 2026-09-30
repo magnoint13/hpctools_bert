@@ -171,6 +171,8 @@ and therefore making these benchmarks repeatable.
 
 # Time and profiling report
 
+## General observations
+
 | Benchmark          | CPU time (MM:SS) | Job wall time (MM:SS) | Train time (s) | Overhead (s) | Memory used (GB) | EM (epoch 4) | F1 (epoch 4) |
 | -                  | -                | -                     | -              | -            | -                | -            | -            |
 | `baseline`         | 09:05            | 10:57                 | 504.82         | 14.34        |  5.34            | 0.5938       | 0.7310       |
@@ -183,11 +185,8 @@ and therefore making these benchmarks repeatable.
 | `all_overhead`     | 02:38            | 04:19                 |  91.51         | 32.42        | 19.39            | 0.5312       | 0.6703       |
 | `all_autotune`     | 06:54            | 06:00                 | 180.31         | 46.02        | 19.39            | 0.5625       | 0.7020       |
 
-In this first table,
-we present the main performance and model-quality metrics for each benchmark.
-The parameters used for each benchmark are described in the previous section.
-
-The following metrics are reported:
+Below are the performance and model-quality metrics
+for each of the nine benchmark configurations described earlier.
 
 - **CPU time** and **job wall time** are reported by SLURM's `seff`.
   CPU time represents the accumulated CPU time used by the job,
@@ -195,45 +194,43 @@ The following metrics are reported:
 - **Train time** is the time measured for the training loop itself.
   The original end-to-end measurement also includes validation and checkpointing,
   which are reported separately as **overhead**.
-- **Memory used** is the maximum GPU memory allocated during the run,
+- **Memory used** is the peak GPU memory allocated during the run,
   measured with `torch.cuda.max_memory_allocated()`.
   This is particularly relevant when evaluating the effect of increasing the batch size.
 
-## General observations
+Wall time is consistently higher than train `time + overhead`,
+by roughly 125-140s across almost every run.
+That gap is everything outside the measured loop:
+environment setup, downloading the model and tokenizer, and tokenizing the dataset.
+Since it doesn't scale with batch size or depend on the compile mode,
+it behaves as a fixed cost every job pays regardless of configuration.
 
-The difference between job wall time and train time
-shows that a non-negligible amount of time is spent outside the main training loop.
-For example, it is approximately 152 s for `baseline`, 136 s for `big_batch`, and 169 s for `amp`.
-This remaining time includes operations outside the measured training loop,
-such as validation, checkpointing, program initialization, model and dataset loading, and other job-related operations.
+CPU time is usually lower than wall time,
+since most of the work happens on the GPU while the CPU sits idle.
+compile_autotune is the exception:
+its CPU time (16:54) is higher than its wall time (13:06).
+This is because `max-autotune` benchmarks use Triton kernels in parallel
+across multiple CPU threads,
+so SLURM's aggregated core-time counter can exceed the wall-clock duration.
 
-The CPU time is generally lower than the wall time
-because the job spends a substantial amount of time executing work on the GPU.
-An exception can be seen in `compile_autotune`,
-where the reported CPU time is higher than the wall time.
-This is consistent with CPU work being performed concurrently,
-particularly during compilation of the model and autotuning.
-
-<!-- batch size -->
+**Batch size**:
 
 With `batch_size=16`, the training runs for 2048 steps,
 whereas with `batch_size=128` it requires only 256 steps.
-Therefore, increasing the batch size by a factor of 8
-reduces the number of optimizer updates and the number of iterations
-in which data is transferred and processed.
+Therefore, 
+`big_batch` performs 8x fewer optimizer updates than the baseline.
+Training time drops modestly, but GPU memory jumps from 5.34GB to 33.20GB.
 
-This results in a lower training time for `big_batch`
-(477.81 s compared with 504.82 s for the baseline).
-However, it also substantially increases GPU memory consumption, from 5.34 GB to 33.20 GB.
+That difference in update count also explains the EM/F1 numbers:
+`big_batch` scores clearly lower than baseline (0.52 vs 0.59 EM),
+but that isn't evidence the larger batch hurts quality
+(it's just 8x fewer gradient updates for the same number of epochs).
 
-This difference in the number of steps or optimizer updates also affects the optimization process.
-Consequently, the final EM and F1 scores should not be interpreted as a direct measure of computational efficiency.
-In particular, comparing configurations with different batch sizes
-involves a change in the number of parameter updates performed during the same number of epochs.
-For a controlled comparison of optimization behaviour,
-the number of optimizer steps or the amount of processed data should also be taken into account.
+Any batch-size comparison in this table should be read as a speed comparison,
+not a quality comparison,
+unless the learning rate or the step count is adjusted to compensate.
 
-<!-- amp`-->
+**Mixed precision**:
 
 The most significant reduction in training time comes from mixed-precision training.
 The `amp` configuration reduces the training time from 504.82 s to 117.26 s,
@@ -244,26 +241,21 @@ In the baseline configuration,
 the main CUDA hotspots are matrix-multiplication operations:
 `aten::mm` accounts for 54.38% of the self CUDA time
 and `aten::addmm` for another 27.16%.
-The corresponding kernels are FP32 SGEMM kernels.
-In the AMP configuration, BF16 GEMM and BF16 attention kernels appear instead,
-showing that the workload is being executed using BF16-capable GPU kernels.
 
-This behaviour is consistent with the hardware capabilities of the NVIDIA A100.
-Depending on the specific A100 variant,
-NVIDIA reports substantially higher Tensor Core throughput for BF16
-than for conventional FP32 execution.
-For example, the A100 40 GB PCIe is specified at 19.5 TFLOPS FP32
-and 312 TFLOPS BF16 Tensor Core performance.
+With AMP enabled, those same operations run through BF16 tensor-core kernels instead
+(`ampere_bf16_s16816gemm_...`), along with BF16 attention kernels.
+That lines up with the A100's spec sheet:
+about 19.5 TFLOPS on plain FP32 vs. 312 TFLOPS on BF16 tensor cores.
+This is over 15x more theoretical throughput on the same chip.
 
-Mixed precision also reduces the measured maximum allocated GPU memory in this experiment,
-from 5.34 GB to 4.10 GB.
+AMP also lowers peak memory here, from 5.34GB to 4.10GB,
+since activations and gradients take up half the space.
 
-<!-- torch.compile -->
+**torch.compile**:
 
 The `torch.compile` configurations do not reduce the training time in isolation in this experiment.
-`compile_default`, `compile_overhead`, and `compile_autotune`
-take 522.38 s, 534.00 s, and 612.37 s respectively,
-all above the 504.82 s of the baseline.
+`compile_default` (522.38s), `compile_overhead` (534.00s) and `compile_autotune` (612.37s)
+are all slower than the uncompiled baseline.
 
 The profiler shows that the compiled configurations execute through compiled regions
 such as `CompiledFunction` and `CompiledFunctionBackward`,
@@ -275,13 +267,12 @@ over the three profiled steps.
 The `compile_overhead` and `compile_autotune` profiles
 similarly show substantial execution inside compiled backward regions.
 
-This indicates that compilation changes the way the workload is executed,
-but in these experiments the compilation and autotuning costs are large enough
-that they do not translate into a lower end-to-end training time.
-In particular, `max-autotune` has the highest training time
-among the compilation-only configurations.
+So compilation is clearly changing how the model executes;
+it just doesn't translate into a net win here.
+`max-autotune` comes out slowest of the three,
+consistent with the extra time it spends benchmarking kernel candidates before picking one.
 
-<!-- all -->
+**Combining everything**:
 
 Finally, combining the larger batch size, mixed precision, and compilation
 produces the lowest training times in the benchmark:
@@ -290,30 +281,28 @@ produces the lowest training times in the benchmark:
 - `all_overhead`: **91.51 s**, corresponding to approximately **5.52x** speedup over the baseline.
 - `all_autotune`: **180.31 s**, corresponding to approximately **2.80x** speedup over the baseline.
 
-Therefore, the best training-loop time in this experiment is obtained with `all_overhead`.
+Memory sits around 19.4GB for all three,
+well below the 33.2GB of big_batch alone,
+since AMP's smaller activations partly offset the extra memory the larger batch needs.
 
-The combined configurations also use considerably more GPU memory than the baseline, at approximately 19.4 GB.
-This is still substantially below the 33.2 GB observed with `big_batch` alone.
-
-The profiler confirms that the combined configurations use a different set of GPU kernels.
-In particular, the `all_autotune` profile contains
-BF16 attention kernels, BF16 GEMM kernels, and several generated Triton kernels.
-`CompiledFunctionBackward` accounts for approximately 525 ms of CUDA time in the profiled window,
-while the compiled forward region accounts for approximately 255 ms.
-
-These results show that the performance improvement of the combined configurations
-cannot be attributed to a single optimization in isolation.
-The reduced number of optimizer steps from the larger batch size,
-BF16 execution through Tensor Cores,
-and the execution of compiled/Triton regions
-all change the execution characteristics of the workload.
+The profiler confirms the combined runs behave differently from any single optimization on its own.
+The use of BF16 GEMM and attention kernels,
+Triton-fused regions,
+and compiled forward/backward blocks all show up together
+(`CompiledFunctionBackward` runs at ~525ms of CUDA time in `all_autotune`, for instance).
+Therefore, the speedup comes from all of the techniques acting together.
 
 ## Profiler analysis
 
 The profiler was used to analyse the GPU execution during a small number of training steps
-rather than the complete training job.
-Therefore, the profiler times should not be compared directly
-with the several-minute end-to-end training times in the table.
+rather than the complete training job,
+so aren't directly comparable to the end-to-end times above.
+
+The profiler is most useful here for identifying where the computation is spent
+rather than for measuring the complete training duration.
+The end-to-end timings in the first table
+should be used to evaluate the actual performance of each benchmark,
+while the profiler explains the changes in the underlying GPU execution.
 
 The profiler output is based on `torch.profiler.key_averages()`,
 which aggregates events by operation.
@@ -332,16 +321,8 @@ The main observations are:
 | `all_overhead`     | Compiled/Triton and BF16 execution                                                        | This configuration obtains the lowest training-loop time in the benchmark.                                                                        |
 | `all_autotune`     | `CompiledFunctionBackward`: \~525 ms; compiled region: \~255 ms; BF16 attention: \~239 ms | The profiler shows extensive use of compiled, Triton, and BF16 kernels, but the end-to-end time is higher than the other combined configurations. |
 
-The profiler is most useful here for identifying *where the computation is spent*
-rather than for measuring the complete training duration.
-The end-to-end timings in the first table
-should be used to evaluate the actual performance of each benchmark,
-while the profiler explains the changes in the underlying GPU execution.
-
 Overall, the profiling results are consistent with the timing measurements:
-the baseline workload is dominated by matrix multiplications;
-mixed precision replaces the main FP32 GEMM/attention kernels with BF16-capable kernels;
+the baseline is dominated by matrix multiplications,
+mixed precision replaces the main FP32 GEMM/attention kernels with BF16-capable kernels,
 and `torch.compile` introduces compiled and Triton-generated regions.
-However, the end-to-end benchmark remains the appropriate metric for determining
-whether these changes actually improve the total training time.
 

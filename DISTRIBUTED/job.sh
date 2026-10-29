@@ -33,5 +33,6 @@ srun python3 train.py fit \
     --data.validation_subset=128 \
     --checkpoint.every_n_train_steps=800 \
     --checkpoint.dirpath=$BASE_PATH/checkpoints/${RUN_NAME} \
+    --final_model.path=$BASE_PATH/models/${RUN_NAME}.pt \
     "$@"
 

@@ -12,6 +12,8 @@ from lightning.pytorch.profilers import PyTorchProfiler
 from datasets import DatasetDict, load_dataset
 from transformers import BertForQuestionAnswering, BertTokenizerFast, get_linear_schedule_with_warmup
 
+import time
+import os
 import eval_model
 import token_model
 
@@ -34,8 +36,9 @@ class SquadBert(L.LightningModule):
         # save the arguments into self.hparams
         self.save_hyperparameters()
         self.model = BertForQuestionAnswering.from_pretrained(model_name)
+        self.model.train()
 
-    def setup(self, _stage):
+    def setup(self, stage):
         torch.set_float32_matmul_precision("high" if self.hparams.tf32 else "highest")
         if self.hparams.compile:
             self.model.compile(mode=self.hparams.compile)
@@ -106,7 +109,7 @@ class SquadData(L.LightningDataModule):
         print(f"Train: {len(raw['train'])} examples | Validation: {len(raw['validation'])} examples")
         self._tokenize(raw)
 
-    def setup(self, _stage=None):
+    def setup(self, stage=None):
         # here the cache is used
         self.train_tok, self.val_features, self.val_inputs = self._tokenize(self._raw())
 
@@ -118,7 +121,7 @@ class SquadData(L.LightningDataModule):
             shuffle=True,
             pin_memory=True,
             num_workers=self.hparams.workers,
-            persistent_workers=True,   # exige workers >= 1
+            persistent_workers=True,
             prefetch_factor=4,
             drop_last=True,
         )
@@ -149,11 +152,24 @@ class SquadEval(L.Callback):
             )
         pl_module.train()
         pl_module.print(f"[epoch {trainer.current_epoch}] validation EM={em:.4f} F1={f1:.4f}")
-        pl_module.log_dict({"val_em": em, "val_f1": f1}, rank_zero_only=True)
+        pl_module.log_dict({"val_em": em, "val_f1": f1}, sync_dist=True)
 
     def on_train_end(self, _trainer, pl_module):
         # print used memory
         pl_module.print(f"Memory used: {torch.cuda.max_memory_allocated() / 1e9} GB")
+
+class SaveModel(L.Callback):
+    def __init__(self, path: str = "models/model.pt"):
+        super().__init__()
+        self.path = path
+
+    def on_train_end(self, trainer, pl_module):
+        if trainer.is_global_zero:
+            os.makedirs(os.path.dirname(self.path) or ".", exist_ok=True)
+            t0 = time.perf_counter()
+            torch.save(pl_module.model.state_dict(), self.path)
+            print(f"Final model saved in {time.perf_counter() - t0:.4f} s")
+
 
 
 #### CLI #######################################################################
@@ -163,6 +179,7 @@ class Cli(LightningCLI):
         parser.link_arguments("model.model_name", "data.model_name")
         parser.add_lightning_class_args(ModelCheckpoint, "checkpoint")
         parser.add_lightning_class_args(SquadEval, "squad_eval")
+        parser.add_lightning_class_args(SaveModel, "final_model")
         parser.set_defaults({
             "checkpoint.dirpath": "checkpoints",
             "checkpoint.filename": "checkpoint",

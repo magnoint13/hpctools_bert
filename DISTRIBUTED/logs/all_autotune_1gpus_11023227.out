@@ -1,0 +1,476 @@
+slurmstepd: info: Setting TMPDIR to /scratch/11023227. Previous errors about TMPDIR can be discarded
+cesga/2020 unloaded
+        Preparing the environment for use of the CESGA 2022 software stack.
+        Please rebuild modules cache: module --ignore-cache avail
+     
+cesga/2022 loaded
+python/3.10.8 loaded
+
+The following have been reloaded with a version change:
+  1) cesga/2020 => cesga/2022
+
+[rank: 0] Seed set to 1234
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/197 [00:00<?, ?it/s]Loading weights: 100%|██████████| 197/197 [00:00<00:00, 8584.88it/s]
+[transformers] [1mBertForQuestionAnswering LOAD REPORT[0m from: google-bert/bert-base-uncased
+Key                                        | Status     | 
+-------------------------------------------+------------+-
+cls.predictions.bias                       | UNEXPECTED | 
+cls.predictions.transform.dense.bias       | UNEXPECTED | 
+cls.seq_relationship.bias                  | UNEXPECTED | 
+cls.predictions.transform.dense.weight     | UNEXPECTED | 
+bert.pooler.dense.bias                     | UNEXPECTED | 
+bert.pooler.dense.weight                   | UNEXPECTED | 
+cls.seq_relationship.weight                | UNEXPECTED | 
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED | 
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED | 
+qa_outputs.bias                            | MISSING    | 
+qa_outputs.weight                          | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+Using bfloat16 Automatic Mixed Precision (AMP)
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+You are using a CUDA device ('NVIDIA A100-PCIE-40GB') that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision('medium' | 'high')` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Loading `train_dataloader` to estimate number of stepping batches.
+Train: 8192 examples | Validation: 128 examples
+/mnt/netapp2/Store_uni/home/ulc/cursos/curso375/hpc_tools/bert/lib/python3.10/site-packages/lightning/pytorch/utilities/model_summary/model_summary.py:242: Precision bf16-mixed is not supported by the model summary.  Estimated model size in MB will not be accurate. Using 32 bits instead.
+┏━━━┳━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┓
+┃   ┃ Name  ┃ Type                     ┃ Params ┃ Mode  ┃ FLOPs ┃
+┡━━━╇━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━┩
+│ 0 │ model │ BertForQuestionAnswering │  108 M │ train │     0 │
+└───┴───────┴──────────────────────────┴────────┴───────┴───────┘
+Trainable params: 108 M                                                         
+Non-trainable params: 0                                                         
+Total params: 108 M                                                             
+Total estimated model params size (MB): 435.573                                 
+Modules in train mode: 227                                                      
+Modules in eval mode: 0                                                         
+Total FLOPs: 0                                                                  
+SLURM auto-requeueing enabled. Setting signal handlers.
+AUTOTUNE addmm(49152x3072, 49152x768, 768x3072)
+strides: [0, 1], [768, 1], [1, 768]
+dtypes: torch.bfloat16, torch.bfloat16, torch.bfloat16
+  triton_mm_93 1.2605 ms 100.0% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=64, BLOCK_M=128, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_92 1.2759 ms 98.8% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=128, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_85 1.2872 ms 97.9% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=64, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_89 1.3548 ms 93.0% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=128, BLOCK_N=64, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_87 1.4920 ms 84.5% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=64, BLOCK_M=64, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_94 1.4961 ms 84.3% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=64, BLOCK_M=128, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=5, num_warps=8
+  bias_addmm 1.6896 ms 74.6% 
+  triton_mm_86 1.7807 ms 70.8% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=64, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=4, num_warps=8
+  triton_mm_90 1.7848 ms 70.6% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=128, BLOCK_N=64, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=4, num_warps=8
+  triton_mm_82 1.8749 ms 67.2% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=64, BLOCK_N=64, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=2, num_warps=4
+SingleProcess AUTOTUNE benchmarking takes 1.0181 seconds and 0.0006 seconds precompiling for 21 choices
+AUTOTUNE addmm(49152x768, 49152x768, 768x768)
+strides: [0, 1], [768, 1], [1, 768]
+dtypes: torch.bfloat16, torch.bfloat16, torch.bfloat16
+  triton_mm_17 0.3133 ms 100.0% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=64, BLOCK_M=128, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_16 0.3256 ms 96.2% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=128, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_13 0.3482 ms 90.0% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=128, BLOCK_N=64, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_9 0.3502 ms 89.5% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=64, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_18 0.3820 ms 82.0% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=64, BLOCK_M=128, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=5, num_warps=8
+  triton_mm_11 0.3963 ms 79.1% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=64, BLOCK_M=64, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  bias_addmm 0.4577 ms 68.5% 
+  triton_mm_14 0.4577 ms 68.5% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=128, BLOCK_N=64, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=4, num_warps=8
+  triton_mm_10 0.4649 ms 67.4% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=64, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=4, num_warps=8
+  triton_mm_6 0.4710 ms 66.5% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=64, BLOCK_N=64, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=2, num_warps=4
+SingleProcess AUTOTUNE benchmarking takes 0.7848 seconds and 0.0003 seconds precompiling for 21 choices
+AUTOTUNE mm(49152x768, 768x768)
+strides: [768, 1], [1, 768]
+dtypes: torch.bfloat16, torch.bfloat16
+  mm 0.2990 ms 100.0% 
+  triton_mm_74 0.3031 ms 98.6% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=64, BLOCK_M=128, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_73 0.3226 ms 92.7% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=128, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_70 0.3277 ms 91.3% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=128, BLOCK_N=64, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_66 0.3287 ms 91.0% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=64, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_68 0.3584 ms 83.4% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=64, BLOCK_M=64, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_75 0.3635 ms 82.3% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=64, BLOCK_M=128, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=5, num_warps=8
+  triton_mm_72 0.4291 ms 69.7% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=128, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=2, num_warps=8
+  triton_mm_71 0.4342 ms 68.9% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=128, BLOCK_N=64, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=4, num_warps=8
+  triton_mm_67 0.4383 ms 68.2% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=64, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=4, num_warps=8
+SingleProcess AUTOTUNE benchmarking takes 0.7282 seconds and 0.0003 seconds precompiling for 20 choices
+AUTOTUNE mm(49152x3072, 3072x768)
+strides: [3072, 1], [1, 3072]
+dtypes: torch.bfloat16, torch.bfloat16
+  mm 1.0301 ms 100.0% 
+  triton_mm_112 1.1704 ms 88.0% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=64, BLOCK_M=128, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_111 1.2247 ms 84.1% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=128, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_108 1.2401 ms 83.1% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=128, BLOCK_N=64, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_106 1.2913 ms 79.8% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=64, BLOCK_M=64, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_104 1.3158 ms 78.3% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=64, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_113 1.5247 ms 67.6% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=64, BLOCK_M=128, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=5, num_warps=8
+  triton_mm_107 1.5636 ms 65.9% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=128, BLOCK_M=64, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=4, num_warps=4
+  triton_mm_105 1.5872 ms 64.9% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=64, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=4, num_warps=8
+  triton_mm_101 1.5954 ms 64.6% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=64, BLOCK_N=64, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=2, num_warps=4
+SingleProcess AUTOTUNE benchmarking takes 0.8845 seconds and 0.0003 seconds precompiling for 20 choices
+AUTOTUNE mm(49152x768, 768x2)
+strides: [768, 1], [1, 768]
+dtypes: torch.bfloat16, torch.bfloat16
+  triton_mm_1372 0.0758 ms 100.0% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=128, BLOCK_M=64, BLOCK_N=16, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=5, num_warps=4
+  triton_mm_1378 0.0758 ms 100.0% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=128, BLOCK_M=64, BLOCK_N=16, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=4, num_warps=4
+  triton_mm_1382 0.0768 ms 98.7% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=64, BLOCK_M=128, BLOCK_N=16, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_1383 0.0768 ms 98.7% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=64, BLOCK_M=128, BLOCK_N=16, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=5, num_warps=8
+  triton_mm_1375 0.0778 ms 97.4% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=64, BLOCK_M=64, BLOCK_N=16, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  mm 0.0870 ms 87.1% 
+  triton_mm_1371 0.0973 ms 77.9% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=64, BLOCK_N=16, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=5, num_warps=4
+  triton_mm_1369 0.0983 ms 77.1% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=128, BLOCK_M=32, BLOCK_N=16, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=2, num_warps=2
+  triton_mm_1377 0.1004 ms 75.5% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=64, BLOCK_N=16, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=4, num_warps=4
+  triton_mm_1380 0.1014 ms 74.7% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=128, BLOCK_N=16, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=4, num_warps=8
+SingleProcess AUTOTUNE benchmarking takes 0.3407 seconds and 0.0002 seconds precompiling for 17 choices
+AUTOTUNE mm(49152x768, 768x3072)
+strides: [768, 1], [3072, 1]
+dtypes: torch.bfloat16, torch.bfloat16
+  triton_mm_1434 1.1715 ms 100.0% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=64, BLOCK_M=128, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_1426 1.2022 ms 97.4% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=64, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_1433 1.2349 ms 94.9% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=128, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_1428 1.3804 ms 84.9% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=64, BLOCK_M=64, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_1430 1.3896 ms 84.3% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=128, BLOCK_N=64, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_1435 1.4234 ms 82.3% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=64, BLOCK_M=128, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=5, num_warps=8
+  triton_mm_1432 1.4705 ms 79.7% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=128, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=2, num_warps=8
+  triton_mm_1427 1.6241 ms 72.1% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=64, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=4, num_warps=8
+  mm 1.6333 ms 71.7% 
+  triton_mm_1431 1.6916 ms 69.2% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=128, BLOCK_N=64, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=4, num_warps=8
+SingleProcess AUTOTUNE benchmarking takes 0.9360 seconds and 0.0003 seconds precompiling for 20 choices
+AUTOTUNE mm(768x49152, 49152x3072)
+strides: [1, 768], [3072, 1]
+dtypes: torch.bfloat16, torch.bfloat16
+  mm 0.8571 ms 100.0% 
+  triton_mm_1445 1.3414 ms 63.9% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=64, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_1447 1.4766 ms 58.0% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=64, BLOCK_M=64, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_1453 1.4879 ms 57.6% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=64, BLOCK_M=128, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_1449 1.5247 ms 56.2% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=128, BLOCK_N=64, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_1452 1.5524 ms 55.2% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=128, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_1450 1.7029 ms 50.3% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=128, BLOCK_N=64, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=4, num_warps=8
+  triton_mm_1448 1.7265 ms 49.6% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=128, BLOCK_M=64, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=4, num_warps=4
+  triton_mm_1454 1.7736 ms 48.3% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=64, BLOCK_M=128, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=5, num_warps=8
+  triton_mm_1444 1.7797 ms 48.2% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=128, BLOCK_M=64, BLOCK_N=64, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=5, num_warps=4
+SingleProcess AUTOTUNE benchmarking takes 0.9169 seconds and 0.0003 seconds precompiling for 20 choices
+AUTOTUNE mm(3072x49152, 49152x768)
+strides: [1, 3072], [768, 1]
+dtypes: torch.bfloat16, torch.bfloat16
+  mm 0.8550 ms 100.0% 
+  triton_mm_1483 1.3404 ms 63.8% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=64, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_1485 1.4612 ms 58.5% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=64, BLOCK_M=64, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_1487 1.4899 ms 57.4% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=128, BLOCK_N=64, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_1491 1.5053 ms 56.8% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=64, BLOCK_M=128, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_1490 1.6046 ms 53.3% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=128, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_1486 1.6957 ms 50.4% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=128, BLOCK_M=64, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=4, num_warps=4
+  triton_mm_1488 1.7039 ms 50.2% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=128, BLOCK_N=64, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=4, num_warps=8
+  triton_mm_1482 1.7910 ms 47.7% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=128, BLOCK_M=64, BLOCK_N=64, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=5, num_warps=4
+  triton_mm_1492 1.7930 ms 47.7% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=64, BLOCK_M=128, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=5, num_warps=8
+SingleProcess AUTOTUNE benchmarking takes 0.9166 seconds and 0.0003 seconds precompiling for 20 choices
+AUTOTUNE mm(768x49152, 49152x768)
+strides: [1, 768], [768, 1]
+dtypes: torch.bfloat16, torch.bfloat16
+  mm 0.2499 ms 100.0% 
+  decompose_k_mm_6_split_6 0.3011 ms 83.0% 
+  decompose_k_mm_24_split_8 0.3461 ms 72.2% 
+  decompose_k_mm_3_split_5 0.3686 ms 67.8% 
+  decompose_k_mm_12_split_7 0.4127 ms 60.5% 
+  triton_mm_1524 0.5007 ms 49.9% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=128, BLOCK_M=64, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=4, num_warps=4
+  triton_mm_1523 0.5018 ms 49.8% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=64, BLOCK_M=64, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_1520 0.5366 ms 46.6% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=128, BLOCK_M=64, BLOCK_N=64, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=5, num_warps=4
+  decompose_k_mm_48_split_9 0.5376 ms 46.5% 
+  triton_mm_1522 0.6093 ms 41.0% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=64, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=4, num_warps=8
+SingleProcess AUTOTUNE benchmarking takes 7.6779 seconds and 0.0003 seconds precompiling for 25 choices
+AUTOTUNE mm(49152x8, 8x768)
+strides: [8, 1], [768, 1]
+dtypes: torch.bfloat16, torch.bfloat16
+  triton_mm_1389 0.0584 ms 100.0% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=16, BLOCK_M=64, BLOCK_N=64, EVEN_K=False, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=2, num_warps=4
+  triton_mm_1390 0.0584 ms 100.0% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=16, BLOCK_M=64, BLOCK_N=64, EVEN_K=False, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=8
+  triton_mm_1391 0.0584 ms 100.0% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=16, BLOCK_M=64, BLOCK_N=64, EVEN_K=False, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=5, num_warps=4
+  triton_mm_1393 0.0584 ms 100.0% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=16, BLOCK_M=64, BLOCK_N=128, EVEN_K=False, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=4, num_warps=8
+  triton_mm_1396 0.0584 ms 100.0% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=16, BLOCK_M=128, BLOCK_N=64, EVEN_K=False, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=4, num_warps=8
+  triton_mm_1392 0.0594 ms 98.3% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=16, BLOCK_M=64, BLOCK_N=128, EVEN_K=False, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_1394 0.0594 ms 98.3% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=16, BLOCK_M=64, BLOCK_N=128, EVEN_K=False, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=4, num_warps=4
+  triton_mm_1395 0.0594 ms 98.3% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=16, BLOCK_M=128, BLOCK_N=64, EVEN_K=False, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_1397 0.0594 ms 98.3% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=16, BLOCK_M=128, BLOCK_N=128, EVEN_K=False, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=2, num_warps=8
+  triton_mm_1398 0.0594 ms 98.3% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=16, BLOCK_M=128, BLOCK_N=128, EVEN_K=False, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+SingleProcess AUTOTUNE benchmarking takes 0.3272 seconds and 0.0002 seconds precompiling for 17 choices
+AUTOTUNE mm(8x49152, 49152x768)
+strides: [49152, 1], [768, 1]
+dtypes: torch.bfloat16, torch.bfloat16
+  decompose_k_mm_6_split_1 0.0799 ms 100.0% 
+  mm 0.0829 ms 96.3% 
+  decompose_k_mm_3_split_0 0.0891 ms 89.7% 
+  decompose_k_mm_48_split_4 0.0963 ms 83.0% 
+  decompose_k_mm_24_split_3 0.0983 ms 81.2% 
+  decompose_k_mm_12_split_2 0.1034 ms 77.2% 
+  triton_mm_1408 0.1423 ms 56.1% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=128, BLOCK_M=16, BLOCK_N=64, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=5, num_warps=4
+  triton_mm_1404 0.1690 ms 47.3% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=128, BLOCK_M=16, BLOCK_N=32, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=5, num_warps=2
+  triton_mm_1403 0.2980 ms 26.8% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=16, BLOCK_N=32, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=5, num_warps=2
+  triton_mm_1416 0.3011 ms 26.5% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=64, BLOCK_M=16, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=5, num_warps=8
+SingleProcess AUTOTUNE benchmarking takes 5.0833 seconds and 0.0003 seconds precompiling for 23 choices
+AUTOTUNE mm(49152x3072, 3072x768)
+strides: [3072, 1], [768, 1]
+dtypes: torch.bfloat16, torch.bfloat16
+  triton_mm_1472 1.1500 ms 100.0% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=64, BLOCK_M=128, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_1471 1.1858 ms 97.0% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=128, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_1464 1.2370 ms 93.0% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=64, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_1468 1.2861 ms 89.4% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=128, BLOCK_N=64, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_1466 1.3660 ms 84.2% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=64, BLOCK_M=64, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_1473 1.3896 ms 82.8% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=64, BLOCK_M=128, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=5, num_warps=8
+  mm 1.5616 ms 73.6% 
+  triton_mm_1467 1.5647 ms 73.5% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=128, BLOCK_M=64, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=4, num_warps=4
+  triton_mm_1470 1.5749 ms 73.0% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=128, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=2, num_warps=8
+  triton_mm_1469 1.6323 ms 70.5% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=128, BLOCK_N=64, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=4, num_warps=8
+SingleProcess AUTOTUNE benchmarking takes 0.8919 seconds and 0.0003 seconds precompiling for 20 choices
+AUTOTUNE mm(49152x768, 768x768)
+strides: [768, 1], [768, 1]
+dtypes: torch.bfloat16, torch.bfloat16
+  mm 0.2918 ms 100.0% 
+  triton_mm_1510 0.2918 ms 100.0% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=64, BLOCK_M=128, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_1502 0.3154 ms 92.5% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=64, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_1506 0.3277 ms 89.1% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=128, BLOCK_N=64, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_1509 0.3277 ms 89.1% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=128, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_1511 0.3604 ms 81.0% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=64, BLOCK_M=128, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=5, num_warps=8
+  triton_mm_1504 0.3615 ms 80.7% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=64, BLOCK_M=64, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_1503 0.4045 ms 72.2% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=64, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=4, num_warps=8
+  triton_mm_1507 0.4127 ms 70.7% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=128, BLOCK_N=64, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=4, num_warps=8
+  triton_mm_1508 0.4219 ms 69.2% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=128, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=2, num_warps=8
+SingleProcess AUTOTUNE benchmarking takes 0.7285 seconds and 0.0003 seconds precompiling for 20 choices
+E1027 13:38:56.118000 2815455 torch/_inductor/select_algorithm.py:2691] [0/1] Runtime error during autotuning: 
+E1027 13:38:56.118000 2815455 torch/_inductor/select_algorithm.py:2691] [0/1] No valid triton configs. OutOfMemoryError: out of resource: triton_mm Required: 196608 Hardware limit:166912 Reducing block sizes or `num_stages` may help.. 
+E1027 13:38:56.118000 2815455 torch/_inductor/select_algorithm.py:2691] [0/1] Ignoring this choice.
+E1027 13:38:56.302000 2815455 torch/_inductor/select_algorithm.py:2691] [0/1] Runtime error during autotuning: 
+E1027 13:38:56.302000 2815455 torch/_inductor/select_algorithm.py:2691] [0/1] No valid triton configs. OutOfMemoryError: out of resource: triton_mm Required: 262144 Hardware limit:166912 Reducing block sizes or `num_stages` may help.. 
+E1027 13:38:56.302000 2815455 torch/_inductor/select_algorithm.py:2691] [0/1] Ignoring this choice.
+E1027 13:38:56.457000 2815455 torch/_inductor/select_algorithm.py:2691] [0/1] Runtime error during autotuning: 
+E1027 13:38:56.457000 2815455 torch/_inductor/select_algorithm.py:2691] [0/1] No valid triton configs. OutOfMemoryError: out of resource: triton_mm Required: 294912 Hardware limit:166912 Reducing block sizes or `num_stages` may help.. 
+E1027 13:38:56.457000 2815455 torch/_inductor/select_algorithm.py:2691] [0/1] Ignoring this choice.
+E1027 13:38:56.713000 2815455 torch/_inductor/select_algorithm.py:2691] [0/1] Runtime error during autotuning: 
+E1027 13:38:56.713000 2815455 torch/_inductor/select_algorithm.py:2691] [0/1] No valid triton configs. OutOfMemoryError: out of resource: triton_mm Required: 262144 Hardware limit:166912 Reducing block sizes or `num_stages` may help.. 
+E1027 13:38:56.713000 2815455 torch/_inductor/select_algorithm.py:2691] [0/1] Ignoring this choice.
+AUTOTUNE mm(49152x768, 768x3072)
+strides: [768, 1], [1, 768]
+dtypes: torch.float32, torch.float32
+  triton_mm_4245 2.1238 ms 100.0% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=128, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_4242 2.5457 ms 83.4% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=128, BLOCK_N=64, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_4238 2.6511 ms 80.1% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=64, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_4239 2.9563 ms 71.8% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=64, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=4, num_warps=8
+  triton_mm_4243 3.0792 ms 69.0% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=128, BLOCK_N=64, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=4, num_warps=8
+  triton_mm_4246 3.1037 ms 68.4% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=64, BLOCK_M=128, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_4240 3.3741 ms 62.9% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=64, BLOCK_M=64, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  mm 3.4089 ms 62.3% 
+  triton_mm_4234 3.4816 ms 61.0% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=16, BLOCK_M=64, BLOCK_N=64, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=2, num_warps=4
+  triton_mm_4235 3.6465 ms 58.2% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=64, BLOCK_N=64, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=2, num_warps=4
+SingleProcess AUTOTUNE benchmarking takes 0.9458 seconds and 0.0003 seconds precompiling for 20 choices
+E1027 13:39:02.194000 2815455 torch/_inductor/select_algorithm.py:2691] [0/1] Runtime error during autotuning: 
+E1027 13:39:02.194000 2815455 torch/_inductor/select_algorithm.py:2691] [0/1] No valid triton configs. OutOfMemoryError: out of resource: triton_mm Required: 196608 Hardware limit:166912 Reducing block sizes or `num_stages` may help.. 
+E1027 13:39:02.194000 2815455 torch/_inductor/select_algorithm.py:2691] [0/1] Ignoring this choice.
+E1027 13:39:02.355000 2815455 torch/_inductor/select_algorithm.py:2691] [0/1] Runtime error during autotuning: 
+E1027 13:39:02.355000 2815455 torch/_inductor/select_algorithm.py:2691] [0/1] No valid triton configs. OutOfMemoryError: out of resource: triton_mm Required: 262144 Hardware limit:166912 Reducing block sizes or `num_stages` may help.. 
+E1027 13:39:02.355000 2815455 torch/_inductor/select_algorithm.py:2691] [0/1] Ignoring this choice.
+E1027 13:39:02.504000 2815455 torch/_inductor/select_algorithm.py:2691] [0/1] Runtime error during autotuning: 
+E1027 13:39:02.504000 2815455 torch/_inductor/select_algorithm.py:2691] [0/1] No valid triton configs. OutOfMemoryError: out of resource: triton_mm Required: 294912 Hardware limit:166912 Reducing block sizes or `num_stages` may help.. 
+E1027 13:39:02.504000 2815455 torch/_inductor/select_algorithm.py:2691] [0/1] Ignoring this choice.
+E1027 13:39:02.753000 2815455 torch/_inductor/select_algorithm.py:2691] [0/1] Runtime error during autotuning: 
+E1027 13:39:02.753000 2815455 torch/_inductor/select_algorithm.py:2691] [0/1] No valid triton configs. OutOfMemoryError: out of resource: triton_mm Required: 262144 Hardware limit:166912 Reducing block sizes or `num_stages` may help.. 
+E1027 13:39:02.753000 2815455 torch/_inductor/select_algorithm.py:2691] [0/1] Ignoring this choice.
+AUTOTUNE mm(49152x3072, 3072x768)
+strides: [3072, 1], [1, 3072]
+dtypes: torch.float32, torch.float32
+  triton_mm_4264 2.0204 ms 100.0% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=128, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_4257 2.5856 ms 78.1% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=64, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_4261 2.5989 ms 77.7% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=128, BLOCK_N=64, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_4265 2.7904 ms 72.4% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=64, BLOCK_M=128, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_4262 2.8447 ms 71.0% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=128, BLOCK_N=64, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=4, num_warps=8
+  triton_mm_4258 2.8559 ms 70.7% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=64, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=4, num_warps=8
+  triton_mm_4259 3.0700 ms 65.8% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=64, BLOCK_M=64, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  mm 3.0740 ms 65.7% 
+  triton_mm_4253 3.4765 ms 58.1% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=16, BLOCK_M=64, BLOCK_N=64, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=2, num_warps=4
+  triton_mm_4255 3.6598 ms 55.2% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=64, BLOCK_M=64, BLOCK_N=64, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=8
+SingleProcess AUTOTUNE benchmarking takes 0.9193 seconds and 0.0003 seconds precompiling for 20 choices
+E1027 13:39:06.230000 2815455 torch/_inductor/select_algorithm.py:2691] [0/1] Runtime error during autotuning: 
+E1027 13:39:06.230000 2815455 torch/_inductor/select_algorithm.py:2691] [0/1] No valid triton configs. OutOfMemoryError: out of resource: triton_mm Required: 196608 Hardware limit:166912 Reducing block sizes or `num_stages` may help.. 
+E1027 13:39:06.230000 2815455 torch/_inductor/select_algorithm.py:2691] [0/1] Ignoring this choice.
+E1027 13:39:06.349000 2815455 torch/_inductor/select_algorithm.py:2691] [0/1] Runtime error during autotuning: 
+E1027 13:39:06.349000 2815455 torch/_inductor/select_algorithm.py:2691] [0/1] No valid triton configs. OutOfMemoryError: out of resource: triton_mm Required: 262144 Hardware limit:166912 Reducing block sizes or `num_stages` may help.. 
+E1027 13:39:06.349000 2815455 torch/_inductor/select_algorithm.py:2691] [0/1] Ignoring this choice.
+E1027 13:39:06.466000 2815455 torch/_inductor/select_algorithm.py:2691] [0/1] Runtime error during autotuning: 
+E1027 13:39:06.466000 2815455 torch/_inductor/select_algorithm.py:2691] [0/1] No valid triton configs. OutOfMemoryError: out of resource: triton_mm Required: 294912 Hardware limit:166912 Reducing block sizes or `num_stages` may help.. 
+E1027 13:39:06.466000 2815455 torch/_inductor/select_algorithm.py:2691] [0/1] Ignoring this choice.
+E1027 13:39:06.660000 2815455 torch/_inductor/select_algorithm.py:2691] [0/1] Runtime error during autotuning: 
+E1027 13:39:06.660000 2815455 torch/_inductor/select_algorithm.py:2691] [0/1] No valid triton configs. OutOfMemoryError: out of resource: triton_mm Required: 262144 Hardware limit:166912 Reducing block sizes or `num_stages` may help.. 
+E1027 13:39:06.660000 2815455 torch/_inductor/select_algorithm.py:2691] [0/1] Ignoring this choice.
+AUTOTUNE addmm(49152x768, 49152x768, 768x768)
+strides: [0, 1], [768, 1], [1, 768]
+dtypes: torch.float32, torch.float32, torch.float32
+  triton_mm_4169 0.5939 ms 100.0% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=128, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_4166 0.6676 ms 89.0% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=128, BLOCK_N=64, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_4162 0.6728 ms 88.3% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=64, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_4163 0.8182 ms 72.6% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=64, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=4, num_warps=8
+  triton_mm_4170 0.8458 ms 70.2% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=64, BLOCK_M=128, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_4167 0.8540 ms 69.5% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=128, BLOCK_N=64, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=4, num_warps=8
+  triton_mm_4164 0.8817 ms 67.4% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=64, BLOCK_M=64, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  bias_addmm 0.8940 ms 66.4% 
+  triton_mm_4159 0.9605 ms 61.8% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=64, BLOCK_N=64, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=2, num_warps=4
+  triton_mm_4160 0.9841 ms 60.4% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=64, BLOCK_M=64, BLOCK_N=64, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=8
+SingleProcess AUTOTUNE benchmarking takes 0.6990 seconds and 0.0003 seconds precompiling for 21 choices
+E1027 13:39:06.870000 2815455 torch/_inductor/select_algorithm.py:2691] [0/1] Runtime error during autotuning: 
+E1027 13:39:06.870000 2815455 torch/_inductor/select_algorithm.py:2691] [0/1] No valid triton configs. OutOfMemoryError: out of resource: triton_mm Required: 196608 Hardware limit:166912 Reducing block sizes or `num_stages` may help.. 
+E1027 13:39:06.870000 2815455 torch/_inductor/select_algorithm.py:2691] [0/1] Ignoring this choice.
+E1027 13:39:06.989000 2815455 torch/_inductor/select_algorithm.py:2691] [0/1] Runtime error during autotuning: 
+E1027 13:39:06.989000 2815455 torch/_inductor/select_algorithm.py:2691] [0/1] No valid triton configs. OutOfMemoryError: out of resource: triton_mm Required: 262144 Hardware limit:166912 Reducing block sizes or `num_stages` may help.. 
+E1027 13:39:06.989000 2815455 torch/_inductor/select_algorithm.py:2691] [0/1] Ignoring this choice.
+E1027 13:39:07.106000 2815455 torch/_inductor/select_algorithm.py:2691] [0/1] Runtime error during autotuning: 
+E1027 13:39:07.106000 2815455 torch/_inductor/select_algorithm.py:2691] [0/1] No valid triton configs. OutOfMemoryError: out of resource: triton_mm Required: 294912 Hardware limit:166912 Reducing block sizes or `num_stages` may help.. 
+E1027 13:39:07.106000 2815455 torch/_inductor/select_algorithm.py:2691] [0/1] Ignoring this choice.
+E1027 13:39:07.296000 2815455 torch/_inductor/select_algorithm.py:2691] [0/1] Runtime error during autotuning: 
+E1027 13:39:07.296000 2815455 torch/_inductor/select_algorithm.py:2691] [0/1] No valid triton configs. OutOfMemoryError: out of resource: triton_mm Required: 262144 Hardware limit:166912 Reducing block sizes or `num_stages` may help.. 
+E1027 13:39:07.296000 2815455 torch/_inductor/select_algorithm.py:2691] [0/1] Ignoring this choice.
+AUTOTUNE mm(49152x768, 768x768)
+strides: [768, 1], [1, 768]
+dtypes: torch.float32, torch.float32
+  mm 0.5437 ms 100.0% 
+  triton_mm_4226 0.5847 ms 93.0% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=128, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_4219 0.6410 ms 84.8% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=64, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_4223 0.6472 ms 84.0% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=128, BLOCK_N=64, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_4220 0.7557 ms 72.0% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=64, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=4, num_warps=8
+  triton_mm_4224 0.7598 ms 71.6% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=128, BLOCK_N=64, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=4, num_warps=8
+  triton_mm_4227 0.7967 ms 68.3% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=64, BLOCK_M=128, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_4221 0.8561 ms 63.5% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=64, BLOCK_M=64, BLOCK_N=128, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_4216 0.8796 ms 61.8% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=64, BLOCK_N=64, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=2, num_warps=4
+  triton_mm_4215 0.9349 ms 58.2% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=16, BLOCK_M=64, BLOCK_N=64, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=2, num_warps=4
+SingleProcess AUTOTUNE benchmarking takes 0.6342 seconds and 0.0003 seconds precompiling for 20 choices
+AUTOTUNE mm(49152x768, 768x4)
+strides: [768, 1], [4, 1]
+dtypes: torch.float32, torch.float32
+  triton_mm_5533 0.1311 ms 100.0% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=128, BLOCK_N=16, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=4, num_warps=8
+  triton_mm_5531 0.1321 ms 99.2% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=128, BLOCK_M=64, BLOCK_N=16, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=4, num_warps=4
+  triton_mm_5535 0.1321 ms 99.2% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=64, BLOCK_M=128, BLOCK_N=16, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_5536 0.1321 ms 99.2% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=64, BLOCK_M=128, BLOCK_N=16, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=5, num_warps=8
+  triton_mm_5525 0.1331 ms 98.5% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=128, BLOCK_M=64, BLOCK_N=16, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=5, num_warps=4
+  mm 0.1352 ms 97.0% 
+  triton_mm_5534 0.1352 ms 97.0% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=128, BLOCK_N=16, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=2, num_warps=8
+  triton_mm_5528 0.1454 ms 90.1% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=64, BLOCK_M=64, BLOCK_N=16, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_5532 0.1454 ms 90.1% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=128, BLOCK_N=16, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=3, num_warps=4
+  triton_mm_5524 0.1556 ms 84.2% ACC_TYPE='tl.float32', ALLOW_TF32=True, BLOCK_K=32, BLOCK_M=64, BLOCK_N=16, EVEN_K=True, GROUP_M=8, USE_FAST_ACCUM=False, num_stages=5, num_warps=4
+SingleProcess AUTOTUNE benchmarking takes 0.4812 seconds and 0.0003 seconds precompiling for 17 choices
+`Trainer.fit` stopped: `max_epochs=4` reached.
+FIT Profiler Report
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+|  Action                                                                                                                                                          	|  Mean duration (s)	|  Num calls      	|  Total time (s) 	|  Percentage %   	|
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+|  Total                                                                                                                                                           	|  -              	|  12640          	|  241.52         	|  100 %          	|
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+|  run_training_epoch                                                                                                                                              	|  46.495         	|  4              	|  185.98         	|  77.003         	|
+|  run_training_batch                                                                                                                                              	|  0.65051        	|  256            	|  166.53         	|  68.952         	|
+|  [LightningModule]SquadBert.optimizer_step                                                                                                                       	|  0.65046        	|  256            	|  166.52         	|  68.946         	|
+|  [Strategy]SingleDeviceStrategy.backward                                                                                                                         	|  0.45638        	|  256            	|  116.83         	|  48.374         	|
+|  [Strategy]SingleDeviceStrategy.training_step                                                                                                                    	|  0.18819        	|  256            	|  48.176         	|  19.947         	|
+|  [Callback]SquadEval.on_train_epoch_end                                                                                                                          	|  10.434         	|  4              	|  41.734         	|  17.28          	|
+|  [LightningModule]SquadBert.setup                                                                                                                                	|  7.6519         	|  1              	|  7.6519         	|  3.1682         	|
+|  [LightningDataModule]SquadData.prepare_data                                                                                                                     	|  2.282          	|  1              	|  2.282          	|  0.94484        	|
+|  [LightningDataModule]SquadData.setup                                                                                                                            	|  1.636          	|  1              	|  1.636          	|  0.67737        	|
+|  [Callback]SaveModel.on_train_end                                                                                                                                	|  0.5091         	|  1              	|  0.5091         	|  0.21079        	|
+|  [_TrainingEpochLoop].train_dataloader_next                                                                                                                      	|  0.0006901      	|  256            	|  0.17666        	|  0.073147       	|
+|  [LightningModule]SquadBert.configure_optimizers                                                                                                                 	|  0.15849        	|  1              	|  0.15849        	|  0.06562        	|
+|  [LightningModule]SquadBert.optimizer_zero_grad                                                                                                                  	|  0.00022512     	|  256            	|  0.057632       	|  0.023862       	|
+|  [Strategy]SingleDeviceStrategy.batch_to_device                                                                                                                  	|  0.00017446     	|  256            	|  0.044662       	|  0.018492       	|
+|  [LightningModule]SquadBert.transfer_batch_to_device                                                                                                             	|  0.00011132     	|  256            	|  0.028498       	|  0.011799       	|
+|  [Callback]RichModelSummary.on_fit_start                                                                                                                         	|  0.020336       	|  1              	|  0.020336       	|  0.0084199      	|
+|  [Callback]SaveConfigCallback.setup                                                                                                                              	|  0.017006       	|  1              	|  0.017006       	|  0.0070411      	|
+|  [LightningModule]SquadBert.configure_gradient_clipping                                                                                                          	|  1.9726e-05     	|  256            	|  0.0050499      	|  0.0020909      	|
+|  [Callback]ModelCheckpoint{'monitor': None, 'mode': 'min', 'every_n_train_steps': 800, 'every_n_epochs': 0, 'train_time_interval': None}.on_train_batch_end      	|  1.8848e-05     	|  256            	|  0.004825       	|  0.0019978      	|
+|  [LightningModule]SquadBert.lr_scheduler_step                                                                                                                    	|  1.6371e-05     	|  256            	|  0.0041909      	|  0.0017352      	|
+|  [Callback]ModelCheckpoint{'monitor': None, 'mode': 'min', 'every_n_train_steps': 800, 'every_n_epochs': 0, 'train_time_interval': None}.on_train_epoch_end      	|  0.00048182     	|  4              	|  0.0019273      	|  0.00079798     	|
+|  [Callback]SquadEval.on_before_zero_grad                                                                                                                         	|  2.9869e-06     	|  256            	|  0.00076465     	|  0.0003166      	|
+|  [Callback]SquadEval.on_after_backward                                                                                                                           	|  2.6627e-06     	|  256            	|  0.00068165     	|  0.00028223     	|
+|  [Callback]SquadEval.on_train_batch_end                                                                                                                          	|  2.4035e-06     	|  256            	|  0.0006153      	|  0.00025476     	|
+|  [Callback]SquadEval.on_train_batch_start                                                                                                                        	|  2.0753e-06     	|  256            	|  0.00053129     	|  0.00021998     	|
+|  [Callback]SquadEval.on_before_backward                                                                                                                          	|  1.9481e-06     	|  256            	|  0.00049871     	|  0.00020649     	|
+|  [Callback]SquadEval.on_before_optimizer_step                                                                                                                    	|  1.8318e-06     	|  256            	|  0.00046894     	|  0.00019416     	|
+[epoch 0] validation EM=0.3516 F1=0.4814
+[epoch 1] validation EM=0.4062 F1=0.5604
+[epoch 2] validation EM=0.5312 F1=0.6782
+[epoch 3] validation EM=0.5547 F1=0.6950
+Memory used: 19.387214848 GB
+Final model saved in 0.5085 s
+|  [LightningDataModule]SquadData.train_dataloader                                                                                                                 	|  0.00040773     	|  1              	|  0.00040773     	|  0.00016882     	|
+|  [Callback]SaveModel.on_train_batch_start                                                                                                                        	|  1.5429e-06     	|  256            	|  0.00039497     	|  0.00016354     	|
+|  [Callback]ModelCheckpoint{'monitor': None, 'mode': 'min', 'every_n_train_steps': 800, 'every_n_epochs': 0, 'train_time_interval': None}.on_after_backward       	|  1.538e-06      	|  256            	|  0.00039373     	|  0.00016302     	|
+|  [Callback]SaveModel.on_before_backward                                                                                                                          	|  1.5329e-06     	|  256            	|  0.00039243     	|  0.00016248     	|
+|  [Callback]SaveModel.on_train_batch_end                                                                                                                          	|  1.5318e-06     	|  256            	|  0.00039214     	|  0.00016236     	|
+|  [LightningModule]SquadBert.on_before_batch_transfer                                                                                                             	|  1.498e-06      	|  256            	|  0.00038348     	|  0.00015878     	|
+|  [Callback]SaveModel.on_before_zero_grad                                                                                                                         	|  1.4885e-06     	|  256            	|  0.00038107     	|  0.00015778     	|
+|  [Callback]ModelCheckpoint{'monitor': None, 'mode': 'min', 'every_n_train_steps': 800, 'every_n_epochs': 0, 'train_time_interval': None}.on_before_backward      	|  1.4774e-06     	|  256            	|  0.00037822     	|  0.0001566      	|
+|  [Callback]SaveModel.on_after_backward                                                                                                                           	|  1.428e-06      	|  256            	|  0.00036556     	|  0.00015136     	|
+|  [Callback]RichModelSummary.on_train_batch_end                                                                                                                   	|  1.4188e-06     	|  256            	|  0.00036321     	|  0.00015039     	|
+|  [Callback]ModelCheckpoint{'monitor': None, 'mode': 'min', 'every_n_train_steps': 800, 'every_n_epochs': 0, 'train_time_interval': None}.on_before_zero_grad     	|  1.4029e-06     	|  256            	|  0.00035914     	|  0.0001487      	|
+|  [Callback]ModelCheckpoint{'monitor': None, 'mode': 'min', 'every_n_train_steps': 800, 'every_n_epochs': 0, 'train_time_interval': None}.on_before_optimizer_step	|  1.3942e-06     	|  256            	|  0.00035692     	|  0.00014778     	|
+|  [Callback]SaveConfigCallback.on_before_backward                                                                                                                 	|  1.3669e-06     	|  256            	|  0.00034992     	|  0.00014488     	|
+|  [Callback]SaveConfigCallback.on_train_batch_end                                                                                                                 	|  1.3637e-06     	|  256            	|  0.00034911     	|  0.00014455     	|
+|  [Callback]ModelCheckpoint{'monitor': None, 'mode': 'min', 'every_n_train_steps': 800, 'every_n_epochs': 0, 'train_time_interval': None}.on_train_batch_start    	|  1.3514e-06     	|  256            	|  0.00034597     	|  0.00014325     	|
+|  [Callback]SaveConfigCallback.on_before_zero_grad                                                                                                                	|  1.3431e-06     	|  256            	|  0.00034382     	|  0.00014236     	|
+|  [Callback]SaveConfigCallback.on_train_batch_start                                                                                                               	|  1.3223e-06     	|  256            	|  0.0003385      	|  0.00014015     	|
+|  [Callback]SaveModel.on_before_optimizer_step                                                                                                                    	|  1.3116e-06     	|  256            	|  0.00033577     	|  0.00013902     	|
+|  [LightningModule]SquadBert.on_after_batch_transfer                                                                                                              	|  1.3116e-06     	|  256            	|  0.00033576     	|  0.00013902     	|
+|  [Callback]RichModelSummary.on_before_zero_grad                                                                                                                  	|  1.2926e-06     	|  256            	|  0.00033091     	|  0.00013701     	|
+|  [Callback]RichModelSummary.on_train_batch_start                                                                                                                 	|  1.2904e-06     	|  256            	|  0.00033035     	|  0.00013678     	|
+|  [Callback]RichModelSummary.on_after_backward                                                                                                                    	|  1.2893e-06     	|  256            	|  0.00033007     	|  0.00013666     	|
+|  [Callback]SaveConfigCallback.on_after_backward                                                                                                                  	|  1.2717e-06     	|  256            	|  0.00032556     	|  0.0001348      	|
+|  [Callback]RichModelSummary.on_before_backward                                                                                                                   	|  1.2616e-06     	|  256            	|  0.00032297     	|  0.00013372     	|
+|  [Callback]SaveConfigCallback.on_before_optimizer_step                                                                                                           	|  1.2488e-06     	|  256            	|  0.00031968     	|  0.00013236     	|
+|  [Callback]RichModelSummary.on_before_optimizer_step                                                                                                             	|  1.2335e-06     	|  256            	|  0.00031579     	|  0.00013075     	|
+|  [LightningModule]SquadBert.on_before_zero_grad                                                                                                                  	|  1.1985e-06     	|  256            	|  0.00030682     	|  0.00012704     	|
+|  [LightningModule]SquadBert.on_after_backward                                                                                                                    	|  1.0743e-06     	|  256            	|  0.00027503     	|  0.00011387     	|
+|  [LightningModule]SquadBert.on_train_batch_end                                                                                                                   	|  1.0692e-06     	|  256            	|  0.00027371     	|  0.00011333     	|
+|  [Strategy]SingleDeviceStrategy.on_train_batch_start                                                                                                             	|  9.9685e-07     	|  256            	|  0.00025519     	|  0.00010566     	|
+|  [LightningModule]SquadBert.on_train_batch_start                                                                                                                 	|  9.9414e-07     	|  256            	|  0.0002545      	|  0.00010537     	|
+|  [LightningModule]SquadBert.on_before_optimizer_step                                                                                                             	|  9.3462e-07     	|  256            	|  0.00023926     	|  9.9065e-05     	|
+|  [LightningModule]SquadBert.on_before_backward                                                                                                                   	|  9.1678e-07     	|  256            	|  0.0002347      	|  9.7175e-05     	|
+|  [Callback]SquadEval.on_train_end                                                                                                                                	|  0.00019479     	|  1              	|  0.00019479     	|  8.0652e-05     	|
+|  [Callback]ModelCheckpoint{'monitor': None, 'mode': 'min', 'every_n_train_steps': 800, 'every_n_epochs': 0, 'train_time_interval': None}.setup                   	|  0.00010332     	|  1              	|  0.00010332     	|  4.2778e-05     	|
+|  [Callback]SaveModel.on_train_epoch_end                                                                                                                          	|  4.5209e-06     	|  4              	|  1.8084e-05     	|  7.4875e-06     	|
+|  [Callback]SquadEval.on_train_epoch_start                                                                                                                        	|  3.3466e-06     	|  4              	|  1.3386e-05     	|  5.5426e-06     	|
+|  [Callback]ModelCheckpoint{'monitor': None, 'mode': 'min', 'every_n_train_steps': 800, 'every_n_epochs': 0, 'train_time_interval': None}.on_fit_start            	|  1.1474e-05     	|  1              	|  1.1474e-05     	|  4.7507e-06     	|
+|  [LightningModule]SquadBert.on_train_epoch_start                                                                                                                 	|  1.6905e-06     	|  4              	|  6.7621e-06     	|  2.7998e-06     	|
+|  [Callback]SaveModel.on_train_epoch_start                                                                                                                        	|  1.6182e-06     	|  4              	|  6.4729e-06     	|  2.6801e-06     	|
+|  [Callback]SaveConfigCallback.on_train_end                                                                                                                       	|  6.4669e-06     	|  1              	|  6.4669e-06     	|  2.6776e-06     	|
+|  [Callback]SaveConfigCallback.on_train_epoch_end                                                                                                                 	|  1.6018e-06     	|  4              	|  6.4073e-06     	|  2.6529e-06     	|
+|  [Callback]SquadEval.on_train_start                                                                                                                              	|  5.858e-06      	|  1              	|  5.858e-06      	|  2.4255e-06     	|
+|  [Callback]ModelCheckpoint{'monitor': None, 'mode': 'min', 'every_n_train_steps': 800, 'every_n_epochs': 0, 'train_time_interval': None}.on_train_epoch_start    	|  1.327e-06      	|  4              	|  5.3078e-06     	|  2.1977e-06     	|
+|  [Callback]SaveConfigCallback.on_train_epoch_start                                                                                                               	|  1.3178e-06     	|  4              	|  5.2711e-06     	|  2.1825e-06     	|
+|  [Callback]SquadEval.on_fit_start                                                                                                                                	|  5.2198e-06     	|  1              	|  5.2198e-06     	|  2.1612e-06     	|
+|  [Callback]RichModelSummary.setup                                                                                                                                	|  5.207e-06      	|  1              	|  5.207e-06      	|  2.1559e-06     	|
+|  [LightningModule]SquadBert.on_train_epoch_end                                                                                                                   	|  1.275e-06      	|  4              	|  5.1002e-06     	|  2.1117e-06     	|
+|  [Callback]RichModelSummary.on_train_epoch_start                                                                                                                 	|  1.2578e-06     	|  4              	|  5.0312e-06     	|  2.0832e-06     	|
+|  [Callback]RichModelSummary.on_train_epoch_end                                                                                                                   	|  1.2333e-06     	|  4              	|  4.9332e-06     	|  2.0426e-06     	|
+|  [LightningModule]SquadBert.on_fit_start                                                                                                                         	|  4.8589e-06     	|  1              	|  4.8589e-06     	|  2.0118e-06     	|
+|  [Callback]SquadEval.setup                                                                                                                                       	|  4.424e-06      	|  1              	|  4.424e-06      	|  1.8317e-06     	|
+|  [Callback]SquadEval.on_fit_end                                                                                                                                  	|  4.0371e-06     	|  1              	|  4.0371e-06     	|  1.6715e-06     	|
+|  [Callback]ModelCheckpoint{'monitor': None, 'mode': 'min', 'every_n_train_steps': 800, 'every_n_epochs': 0, 'train_time_interval': None}.on_train_start          	|  3.0091e-06     	|  1              	|  3.0091e-06     	|  1.2459e-06     	|
+|  [LightningModule]SquadBert.configure_callbacks                                                                                                                  	|  2.4149e-06     	|  1              	|  2.4149e-06     	|  9.9988e-07     	|
+|  [Callback]SquadEval.teardown                                                                                                                                    	|  2.38e-06       	|  1              	|  2.38e-06       	|  9.8542e-07     	|
+|  [Callback]ModelCheckpoint{'monitor': None, 'mode': 'min', 'every_n_train_steps': 800, 'every_n_epochs': 0, 'train_time_interval': None}.on_train_end            	|  2.2459e-06     	|  1              	|  2.2459e-06     	|  9.299e-07      	|
+|  [LightningModule]SquadBert.on_train_end                                                                                                                         	|  2.2131e-06     	|  1              	|  2.2131e-06     	|  9.163e-07      	|
+|  [Callback]SaveModel.on_train_start                                                                                                                              	|  1.8959e-06     	|  1              	|  1.8959e-06     	|  7.85e-07       	|
+|  [Strategy]SingleDeviceStrategy.on_train_end                                                                                                                     	|  1.865e-06      	|  1              	|  1.865e-06      	|  7.7218e-07     	|
+|  [LightningDataModule]SquadData.teardown                                                                                                                         	|  1.78e-06       	|  1              	|  1.78e-06       	|  7.37e-07       	|
+|  [Callback]SaveModel.setup                                                                                                                                       	|  1.7469e-06     	|  1              	|  1.7469e-06     	|  7.2331e-07     	|
+|  [Callback]SaveConfigCallback.on_train_start                                                                                                                     	|  1.7451e-06     	|  1              	|  1.7451e-06     	|  7.2254e-07     	|
+|  [Callback]SaveModel.on_fit_start                                                                                                                                	|  1.733e-06      	|  1              	|  1.733e-06      	|  7.1752e-07     	|
+|  [Callback]RichModelSummary.on_train_end                                                                                                                         	|  1.628e-06      	|  1              	|  1.628e-06      	|  6.7405e-07     	|
+|  [Callback]SaveModel.on_fit_end                                                                                                                                  	|  1.546e-06      	|  1              	|  1.546e-06      	|  6.4011e-07     	|
+|  [Callback]ModelCheckpoint{'monitor': None, 'mode': 'min', 'every_n_train_steps': 800, 'every_n_epochs': 0, 'train_time_interval': None}.on_fit_end              	|  1.542e-06      	|  1              	|  1.542e-06      	|  6.3847e-07     	|
+|  [Callback]SaveConfigCallback.on_fit_start                                                                                                                       	|  1.4941e-06     	|  1              	|  1.4941e-06     	|  6.1861e-07     	|
+|  [Callback]SaveModel.teardown                                                                                                                                    	|  1.4929e-06     	|  1              	|  1.4929e-06     	|  6.1813e-07     	|
+|  [LightningModule]SquadBert.on_train_start                                                                                                                       	|  1.411e-06      	|  1              	|  1.411e-06      	|  5.842e-07      	|
+|  [Callback]RichModelSummary.on_train_start                                                                                                                       	|  1.4021e-06     	|  1              	|  1.4021e-06     	|  5.8053e-07     	|
+|  [Callback]ModelCheckpoint{'monitor': None, 'mode': 'min', 'every_n_train_steps': 800, 'every_n_epochs': 0, 'train_time_interval': None}.teardown                	|  1.3921e-06     	|  1              	|  1.3921e-06     	|  5.7639e-07     	|
+|  [Callback]SaveConfigCallback.teardown                                                                                                                           	|  1.3821e-06     	|  1              	|  1.3821e-06     	|  5.7224e-07     	|
+|  [LightningModule]SquadBert.on_fit_end                                                                                                                           	|  1.3709e-06     	|  1              	|  1.3709e-06     	|  5.6762e-07     	|
+|  [Callback]RichModelSummary.teardown                                                                                                                             	|  1.3399e-06     	|  1              	|  1.3399e-06     	|  5.548e-07      	|
+|  [Callback]RichModelSummary.on_fit_end                                                                                                                           	|  1.261e-06      	|  1              	|  1.261e-06      	|  5.2212e-07     	|
+|  [Callback]SaveConfigCallback.on_fit_end                                                                                                                         	|  1.2391e-06     	|  1              	|  1.2391e-06     	|  5.1305e-07     	|
+|  [LightningModule]SquadBert.teardown                                                                                                                             	|  1.0389e-06     	|  1              	|  1.0389e-06     	|  4.3015e-07     	|
+|  [Strategy]SingleDeviceStrategy.on_train_start                                                                                                                   	|  9.4017e-07     	|  1              	|  9.4017e-07     	|  3.8927e-07     	|
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+

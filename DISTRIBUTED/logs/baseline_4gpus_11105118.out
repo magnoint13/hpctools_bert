@@ -1,0 +1,372 @@
+slurmstepd: info: Setting TMPDIR to /scratch/11105118. Previous errors about TMPDIR can be discarded
+cesga/2020 unloaded
+        Preparing the environment for use of the CESGA 2022 software stack.
+        Please rebuild modules cache: module --ignore-cache avail
+     
+cesga/2022 loaded
+python/3.10.8 loaded
+
+The following have been reloaded with a version change:
+  1) cesga/2020 => cesga/2022
+
+[rank: 0] Seed set to 1234
+[rank: 1] Seed set to 1234
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/197 [00:00<?, ?it/s]Loading weights:  11%|█         | 21/197 [00:00<00:00, 186.90it/s]Loading weights:  24%|██▍       | 47/197 [00:00<00:00, 199.27it/s]Loading weights:  34%|███▍      | 67/197 [00:00<00:01, 128.64it/s]Loading weights:  47%|████▋     | 93/197 [00:00<00:00, 149.18it/s]Loading weights:  59%|█████▉    | 116/197 [00:00<00:00, 138.96it/s]Loading weights:  66%|██████▋   | 131/197 [00:01<00:00, 108.67it/s]Loading weights:  75%|███████▌  | 148/197 [00:01<00:00, 112.60it/s]Loading weights: 100%|██████████| 197/197 [00:01<00:00, 168.73it/s]
+Loading weights:   0%|          | 0/197 [00:00<?, ?it/s]Loading weights:  13%|█▎        | 26/197 [00:00<00:00, 226.55it/s]Loading weights:  25%|██▍       | 49/197 [00:00<00:01, 108.31it/s]Loading weights:  34%|███▍      | 67/197 [00:00<00:01, 119.33it/s]Loading weights:  42%|████▏     | 82/197 [00:00<00:01, 110.97it/s]Loading weights:  48%|████▊     | 95/197 [00:00<00:01, 85.00it/s] Loading weights:  53%|█████▎    | 105/197 [00:01<00:01, 73.48it/s]Loading weights:  96%|█████████▌| 189/197 [00:01<00:00, 225.26it/s]Loading weights: 100%|██████████| 197/197 [00:01<00:00, 159.04it/s]
+[transformers] [1mBertForQuestionAnswering LOAD REPORT[0m from: google-bert/bert-base-uncased
+Key                                        | Status     | 
+-------------------------------------------+------------+-
+cls.predictions.transform.dense.weight     | UNEXPECTED | 
+cls.seq_relationship.weight                | UNEXPECTED | 
+cls.seq_relationship.bias                  | UNEXPECTED | 
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED | 
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED | 
+bert.pooler.dense.bias                     | UNEXPECTED | 
+cls.predictions.transform.dense.bias       | UNEXPECTED | 
+bert.pooler.dense.weight                   | UNEXPECTED | 
+cls.predictions.bias                       | UNEXPECTED | 
+qa_outputs.bias                            | MISSING    | 
+qa_outputs.weight                          | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+[transformers] [1mBertForQuestionAnswering LOAD REPORT[0m from: google-bert/bert-base-uncased
+Key                                        | Status     | 
+-------------------------------------------+------------+-
+bert.pooler.dense.bias                     | UNEXPECTED | 
+cls.predictions.bias                       | UNEXPECTED | 
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED | 
+cls.predictions.transform.dense.bias       | UNEXPECTED | 
+cls.seq_relationship.weight                | UNEXPECTED | 
+bert.pooler.dense.weight                   | UNEXPECTED | 
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED | 
+cls.predictions.transform.dense.weight     | UNEXPECTED | 
+cls.seq_relationship.bias                  | UNEXPECTED | 
+qa_outputs.weight                          | MISSING    | 
+qa_outputs.bias                            | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+You are using a CUDA device ('NVIDIA A100-PCIE-40GB') that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision('medium' | 'high')` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+Initializing distributed: GLOBAL_RANK: 1, MEMBER: 2/4
+Initializing distributed: GLOBAL_RANK: 0, MEMBER: 1/4
+[rank: 2] Seed set to 1234
+[rank: 3] Seed set to 1234
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/197 [00:00<?, ?it/s]Loading weights: 100%|██████████| 197/197 [00:00<00:00, 3173.04it/s]
+Loading weights:   0%|          | 0/197 [00:00<?, ?it/s]Loading weights: 100%|██████████| 197/197 [00:00<00:00, 6501.26it/s]
+[transformers] [1mBertForQuestionAnswering LOAD REPORT[0m from: google-bert/bert-base-uncased
+Key                                        | Status     | 
+-------------------------------------------+------------+-
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED | 
+cls.predictions.transform.dense.bias       | UNEXPECTED | 
+cls.seq_relationship.bias                  | UNEXPECTED | 
+cls.seq_relationship.weight                | UNEXPECTED | 
+cls.predictions.transform.dense.weight     | UNEXPECTED | 
+bert.pooler.dense.bias                     | UNEXPECTED | 
+bert.pooler.dense.weight                   | UNEXPECTED | 
+cls.predictions.bias                       | UNEXPECTED | 
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED | 
+qa_outputs.bias                            | MISSING    | 
+qa_outputs.weight                          | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+[transformers] [1mBertForQuestionAnswering LOAD REPORT[0m from: google-bert/bert-base-uncased
+Key                                        | Status     | 
+-------------------------------------------+------------+-
+cls.seq_relationship.bias                  | UNEXPECTED | 
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED | 
+cls.predictions.transform.dense.bias       | UNEXPECTED | 
+cls.seq_relationship.weight                | UNEXPECTED | 
+cls.predictions.transform.dense.weight     | UNEXPECTED | 
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED | 
+bert.pooler.dense.bias                     | UNEXPECTED | 
+bert.pooler.dense.weight                   | UNEXPECTED | 
+cls.predictions.bias                       | UNEXPECTED | 
+qa_outputs.bias                            | MISSING    | 
+qa_outputs.weight                          | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+Initializing distributed: GLOBAL_RANK: 3, MEMBER: 4/4
+Initializing distributed: GLOBAL_RANK: 2, MEMBER: 3/4
+----------------------------------------------------------------------------------------------------
+distributed_backend=nccl
+All distributed processes registered. Starting with 4 processes
+----------------------------------------------------------------------------------------------------
+
+[Gloo] Rank 2 is connected to 3 peer ranks. Expected number of connected peer ranks is : 3
+[Gloo] Rank 0 is connected to 3 peer ranks. Expected number of connected peer ranks is : 3
+[Gloo] Rank 1 is connected to 3 peer ranks. Expected number of connected peer ranks is : 3
+[Gloo] Rank 3 is connected to 3 peer ranks. Expected number of connected peer ranks is : 3
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0,1]
+LOCAL_RANK: 1 - CUDA_VISIBLE_DEVICES: [0,1]
+LOCAL_RANK: 1 - CUDA_VISIBLE_DEVICES: [0,1]
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0,1]
+Loading `train_dataloader` to estimate number of stepping batches.
+Train: 8192 examples | Validation: 128 examples
+Train: 8192 examples | Validation: 128 examples
+┏━━━┳━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┓
+┃   ┃ Name  ┃ Type                     ┃ Params ┃ Mode  ┃ FLOPs ┃
+┡━━━╇━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━┩
+│ 0 │ model │ BertForQuestionAnswering │  108 M │ train │     0 │
+└───┴───────┴──────────────────────────┴────────┴───────┴───────┘
+Trainable params: 108 M                                                         
+Non-trainable params: 0                                                         
+Total params: 108 M                                                             
+Total estimated model params size (MB): 435.573                                 
+Modules in train mode: 227                                                      
+Modules in eval mode: 0                                                         
+Total FLOPs: 0                                                                  
+SLURM auto-requeueing enabled. Setting signal handlers.
+SLURM auto-requeueing enabled. Setting signal handlers.
+SLURM auto-requeueing enabled. Setting signal handlers.
+SLURM auto-requeueing enabled. Setting signal handlers.
+`Trainer.fit` stopped: `max_epochs=4` reached.
+FIT Profiler Report
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+|  Action                                                                                                                                                          	|  Mean duration (s)	|  Num calls      	|  Total time (s) 	|  Percentage %   	|
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+|  Total                                                                                                                                                           	|  -              	|  25184          	|  159.94         	|  100 %          	|
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+|  run_training_epoch                                                                                                                                              	|  35.527         	|  4              	|  142.11         	|  88.851         	|
+|  run_training_batch                                                                                                                                              	|  0.27358        	|  512            	|  140.07         	|  87.577         	|
+|  [LightningModule]SquadBert.optimizer_step                                                                                                                       	|  0.27339        	|  512            	|  139.98         	|  87.517         	|
+|  [Strategy]DDPStrategy.backward                                                                                                                                  	|  0.017974       	|  512            	|  9.2029         	|  5.7539         	|
+|  [Strategy]DDPStrategy.training_step                                                                                                                             	|  0.013347       	|  512            	|  6.8336         	|  4.2726         	|
+|  [LightningDataModule]SquadData.prepare_data                                                                                                                     	|  4.2245         	|  1              	|  4.2245         	|  2.6413         	|
+|  [Callback]SquadEval.on_train_epoch_end                                                                                                                          	|  0.73811        	|  4              	|  2.9524         	|  1.8459         	|
+|  [LightningDataModule]SquadData.setup                                                                                                                            	|  1.6916         	|  1              	|  1.6916         	|  1.0576         	|
+|  [Callback]SaveConfigCallback.setup                                                                                                                              	|  0.75747        	|  1              	|  0.75747        	|  0.47359        	|
+|  [_TrainingEpochLoop].train_dataloader_next                                                                                                                      	|  0.00072555     	|  512            	|  0.37148        	|  0.23226        	|
+|  [LightningModule]SquadBert.configure_optimizers                                                                                                                 	|  0.36585        	|  1              	|  0.36585        	|  0.22874        	|
+|  [LightningModule]SquadBert.optimizer_zero_grad                                                                                                                  	|  0.00050177     	|  512            	|  0.25691        	|  0.16062        	|
+|  [Strategy]DDPStrategy.batch_to_device                                                                                                                           	|  0.00018918     	|  512            	|  0.096861       	|  0.06056        	|
+|  [LightningModule]SquadBert.transfer_batch_to_device                                                                                                             	|  0.00011834     	|  512            	|  0.060592       	|  0.037884       	|
+|  [Callback]ModelCheckpoint{'monitor': None, 'mode': 'min', 'every_n_train_steps': 800, 'every_n_epochs': 0, 'train_time_interval': None}.on_train_batch_end      	|  2.1292e-05     	|  512            	|  0.010901       	|  0.0068158      	|
+|  [LightningModule]SquadBert.configure_gradient_clipping                                                                                                          	|  1.9476e-05     	|  512            	|  0.0099716      	|  0.0062345      	|
+|  [LightningModule]SquadBert.lr_scheduler_step                                                                                                                    	|  1.7451e-05     	|  512            	|  0.0089347      	|  0.0055862      	|
+|  [Callback]RichModelSummary.on_fit_start                                                                                                                         	|  0.0082784      	|  1              	|  0.0082784      	|  0.0051759      	|
+|  [Callback]ModelCheckpoint{'monitor': None, 'mode': 'min', 'every_n_train_steps': 800, 'every_n_epochs': 0, 'train_time_interval': None}.on_train_epoch_end      	|  0.0011596      	|  4              	|  0.0046385      	|  0.0029001      	|
+|  [Callback]SquadEval.on_before_zero_grad                                                                                                                         	|  3.2508e-06     	|  512            	|  0.0016644      	|  0.0010406      	|
+|  [Callback]SquadEval.on_after_backward                                                                                                                           	|  2.9156e-06     	|  512            	|  0.0014928      	|  0.00093335     	|
+|  [Callback]SquadEval.on_train_batch_end                                                                                                                          	|  2.478e-06      	|  512            	|  0.0012687      	|  0.00079325     	|
+|  [Callback]SquadEval.on_train_batch_start                                                                                                                        	|  2.1239e-06     	|  512            	|  0.0010874      	|  0.0006799      	|
+|  [Callback]SquadEval.on_before_backward                                                                                                                          	|  2.037e-06      	|  512            	|  0.0010429      	|  0.00065207     	|
+|  [Callback]SquadEval.on_before_optimizer_step                                                                                                                    	|  1.7262e-06     	|  512            	|  0.00088379     	|  0.00055257     	|
+|  [Callback]SaveModel.on_train_batch_start                                                                                                                        	|  1.6025e-06     	|  512            	|  0.00082048     	|  0.00051298     	|
+|  [LightningModule]SquadBert.on_before_batch_transfer                                                                                                             	|  1.5962e-06     	|  512            	|  0.00081724     	|  0.00051096     	|
+|  [Callback]SaveModel.on_before_zero_grad                                                                                                                         	|  1.5515e-06     	|  512            	|  0.00079436     	|  0.00049666     	|
+|  [Callback]SaveModel.on_train_batch_end                                                                                                                          	|  1.5235e-06     	|  512            	|  0.00078002     	|  0.00048769     	|
+|  [Callback]SaveModel.on_after_backward                                                                                                                           	|  1.5167e-06     	|  512            	|  0.00077658     	|  0.00048554     	|
+|  [Callback]RichModelSummary.on_train_batch_end                                                                                                                   	|  1.4926e-06     	|  512            	|  0.00076422     	|  0.00047781     	|
+|  [Callback]ModelCheckpoint{'monitor': None, 'mode': 'min', 'every_n_train_steps': 800, 'every_n_epochs': 0, 'train_time_interval': None}.on_before_backward      	|  1.4785e-06     	|  512            	|  0.00075698     	|  0.00047328     	|
+|  [Callback]ModelCheckpoint{'monitor': None, 'mode': 'min', 'every_n_train_steps': 800, 'every_n_epochs': 0, 'train_time_interval': None}.on_after_backward       	|  1.4694e-06     	|  512            	|  0.00075232     	|  0.00047037     	|
+|  [Callback]SaveModel.on_before_backward                                                                                                                          	|  1.4491e-06     	|  512            	|  0.00074195     	|  0.00046389     	|
+|  [Callback]SaveModel.on_before_optimizer_step                                                                                                                    	|  1.4023e-06     	|  512            	|  0.00071797     	|  0.0004489      	|
+|  [LightningModule]SquadBert.on_after_batch_transfer                                                                                                              	|  1.381e-06      	|  512            	|  0.00070707     	|  0.00044208     	|
+|  [Callback]ModelCheckpoint{'monitor': None, 'mode': 'min', 'every_n_train_steps': 800, 'every_n_epochs': 0, 'train_time_interval': None}.on_train_batch_start    	|  1.3765e-06     	|  512            	|  0.00070477     	|  0.00044064     	|
+|  [Callback]ModelCheckpoint{'monitor': None, 'mode': 'min', 'every_n_train_steps': 800, 'every_n_epochs': 0, 'train_time_interval': None}.on_before_zero_grad     	|  1.3736e-06     	|  512            	|  0.00070327     	|  0.0004397      	|
+|  [Callback]ModelCheckpoint{'monitor': None, 'mode': 'min', 'every_n_train_steps': 800, 'every_n_epochs': 0, 'train_time_interval': None}.on_before_optimizer_step	|  1.3682e-06     	|  512            	|  0.00070052     	|  0.00043798     	|
+|  [Callback]SaveConfigCallback.on_before_zero_grad                                                                                                                	|  1.3441e-06     	|  512            	|  0.00068817     	|  0.00043026     	|
+|  [Callback]SaveConfigCallback.on_after_backward                                                                                                                  	|  1.3325e-06     	|  512            	|  0.00068222     	|  0.00042654     	|
+|  [Callback]SaveConfigCallback.on_train_batch_start                                                                                                               	|  1.3248e-06     	|  512            	|  0.00067828     	|  0.00042408     	|
+|  [Callback]SaveConfigCallback.on_train_batch_end                                                                                                                 	|  1.3239e-06     	|  512            	|  0.00067781     	|  0.00042379     	|
+|  [Callback]RichModelSummary.on_before_backward                                                                                                                   	|  1.3046e-06     	|  512            	|  0.00066794     	|  0.00041761     	|
+|  [Callback]SaveConfigCallback.on_before_optimizer_step                                                                                                           	|  1.3032e-06     	|  512            	|  0.00066724     	|  0.00041718     	|
+|  [Callback]SaveConfigCallback.on_before_backward                                                                                                                 	|  1.2874e-06     	|  512            	|  0.00065915     	|  0.00041212     	|
+|  [Callback]RichModelSummary.on_before_optimizer_step                                                                                                             	|  1.2856e-06     	|  512            	|  0.00065823     	|  0.00041155     	|
+|  [Callback]RichModelSummary.on_before_zero_grad                                                                                                                  	|  1.279e-06      	|  512            	|  0.00065485     	|  0.00040943     	|
+|  [Callback]RichModelSummary.on_train_batch_start                                                                                                                 	|  1.2555e-06     	|  512            	|  0.00064281     	|  0.0004019      	|
+|  [LightningModule]SquadBert.on_before_zero_grad                                                                                                                  	|  1.2381e-06     	|  512            	|  0.00063391     	|  0.00039634     	|
+|  [Callback]RichModelSummary.on_after_backward                                                                                                                    	|  1.2351e-06     	|  512            	|  0.00063237     	|  0.00039538     	|
+|  [LightningModule]SquadBert.on_after_backward                                                                                                                    	|  1.0905e-06     	|  512            	|  0.00055836     	|  0.0003491      	|
+|  [LightningModule]SquadBert.on_train_batch_end                                                                                                                   	|  1.0885e-06     	|  512            	|  0.00055733     	|  0.00034846     	|
+|  [LightningModule]SquadBert.on_before_backward                                                                                                                   	|  1.02e-06       	|  512            	|  0.00052223     	|  0.00032651     	|
+|  [LightningModule]SquadBert.on_train_batch_start                                                                                                                 	|  9.9194e-07     	|  512            	|  0.00050787     	|  0.00031754     	|
+|  [Strategy]DDPStrategy.on_train_batch_start                                                                                                                      	|  9.6366e-07     	|  512            	|  0.00049339     	|  0.00030848     	|
+|  [LightningModule]SquadBert.on_before_optimizer_step                                                                                                             	|  9.3533e-07     	|  512            	|  0.00047889     	|  0.00029941     	|
+|  [LightningDataModule]SquadData.train_dataloader                                                                                                                 	|  0.00043699     	|  1              	|  0.00043699     	|  0.00027322     	|
+|  [Callback]ModelCheckpoint{'monitor': None, 'mode': 'min', 'every_n_train_steps': 800, 'every_n_epochs': 0, 'train_time_interval': None}.setup                   	|  0.00042235     	|  1              	|  0.00042235     	|  0.00026406     	|
+|  [Callback]SquadEval.on_train_end                                                                                                                                	|  0.00022498     	|  1              	|  0.00022498     	|  0.00014066     	|
+|  [LightningModule]SquadBert.setup                                                                                                                                	|  1.3222e-05     	|  1              	|  1.3222e-05     	|  8.2667e-06     	|
+|  [Callback]SaveModel.on_train_epoch_end                                                                                                                          	|  3.1129e-06     	|  4              	|  1.2452e-05     	|  7.7852e-06     	|
+|  [Callback]SquadEval.on_train_epoch_start                                                                                                                        	|  2.4968e-06     	|  4              	|  9.987e-06      	|  6.2442e-06     	|
+|  [Callback]SquadEval.on_train_start                                                                                                                              	|  7.5409e-06     	|  1              	|  7.5409e-06     	|  4.7148e-06     	|
+|  [LightningModule]SquadBert.on_fit_start                                                                                                                         	|  7.1111e-06     	|  1              	|  7.1111e-06     	|  4.4461e-06     	|
+|  [Callback]SaveConfigCallback.on_train_epoch_end                                                                                                                 	|  1.6219e-06     	|  4              	|  6.4876e-06     	|  4.0562e-06     	|
+|  [LightningModule]SquadBert.on_train_epoch_start                                                                                                                 	|  1.58e-06       	|  4              	|  6.32e-06       	|  3.9514e-06     	|
+|  [Callback]SaveModel.on_train_epoch_start                                                                                                                        	|  1.5065e-06     	|  4              	|  6.0261e-06     	|  3.7677e-06     	|
+|  [Callback]ModelCheckpoint{'monitor': None, 'mode': 'min', 'every_n_train_steps': 800, 'every_n_epochs': 0, 'train_time_interval': None}.on_train_epoch_start    	|  1.333e-06      	|  4              	|  5.3318e-06     	|  3.3336e-06     	|
+|  [Callback]SaveModel.on_train_end                                                                                                                                	|  5.3314e-06     	|  1              	|  5.3314e-06     	|  3.3333e-06     	|
+|  [Callback]RichModelSummary.on_train_epoch_end                                                                                                                   	|  1.3207e-06     	|  4              	|  5.2829e-06     	|  3.303e-06      	|
+|  [Callback]SaveConfigCallback.on_train_epoch_start                                                                                                               	|  1.3165e-06     	|  4              	|  5.2662e-06     	|  3.2925e-06     	|
+|  [LightningModule]SquadBert.on_train_epoch_end                                                                                                                   	|  1.277e-06      	|  4              	|  5.1078e-06     	|  3.1936e-06     	|
+|  [Callback]RichModelSummary.setup                                                                                                                                	|  5.0911e-06     	|  1              	|  5.0911e-06     	|  3.1831e-06     	|
+|  [Callback]RichModelSummary.on_train_epoch_start                                                                                                                 	|  1.2453e-06     	|  4              	|  4.9812e-06     	|  3.1144e-06     	|
+|  [Callback]SquadEval.on_fit_end                                                                                                                                  	|  4.6669e-06     	|  1              	|  4.6669e-06     	|  2.9178e-06     	|
+|  [Callback]SquadEval.on_fit_start                                                                                                                                	|  4.0443e-06     	|  1              	|  4.0443e-06     	|  2.5286e-06     	|
+|  [Callback]SquadEval.setup                                                                                                                                       	|  3.98e-06       	|  1              	|  3.98e-06       	|  2.4884e-06     	|
+|  [Callback]ModelCheckpoint{'monitor': None, 'mode': 'min', 'every_n_train_steps': 800, 'every_n_epochs': 0, 'train_time_interval': None}.on_fit_start            	|  3.5428e-06     	|  1              	|  3.5428e-06     	|  2.215e-06      	|
+|  [Callback]ModelCheckpoint{'monitor': None, 'mode': 'min', 'every_n_train_steps': 800, 'every_n_epochs': 0, 'train_time_interval': None}.on_train_start          	|  2.9998e-06     	|  1              	|  2.9998e-06     	|  1.8755e-06     	|
+|  [Callback]SquadEval.teardown                                                                                                                                    	|  2.7949e-06     	|  1              	|  2.7949e-06     	|  1.7474e-06     	|
+|  [LightningModule]SquadBert.configure_callbacks                                                                                                                  	|  2.4722e-06     	|  1              	|  2.4722e-06     	|  1.5457e-06     	|
+|  [LightningDataModule]SquadData.teardown                                                                                                                         	|  1.96e-06       	|  1              	|  1.96e-06       	|  1.2254e-06     	|
+|  [Callback]SaveModel.on_fit_start                                                                                                                                	|  1.9101e-06     	|  1              	|  1.9101e-06     	|  1.1943e-06     	|
+|  [Callback]SaveModel.setup                                                                                                                                       	|  1.8617e-06     	|  1              	|  1.8617e-06     	|  1.164e-06      	|
+|  [Callback]ModelCheckpoint{'monitor': None, 'mode': 'min', 'every_n_train_steps': 800, 'every_n_epochs': 0, 'train_time_interval': None}.on_train_end            	|  1.8524e-06     	|  1              	|  1.8524e-06     	|  1.1582e-06     	|
+|  [Callback]SaveConfigCallback.on_train_end                                                                                                                       	|  1.7099e-06     	|  1              	|  1.7099e-06     	|  1.0691e-06     	|
+|  [Callback]SaveModel.on_fit_end                                                                                                                                  	|  1.6987e-06     	|  1              	|  1.6987e-06     	|  1.0621e-06     	|
+|  [LightningModule]SquadBert.on_train_start                                                                                                                       	|  1.6941e-06     	|  1              	|  1.6941e-06     	|  1.0592e-06     	|
+|  [Callback]SaveConfigCallback.on_train_start                                                                                                                     	|  1.6727e-06     	|  1              	|  1.6727e-06     	|  1.0458e-06     	|
+|  [Callback]SaveModel.teardown                                                                                                                                    	|  1.594e-06      	|  1              	|  1.594e-06      	|  9.9659e-07     	|
+|  [Callback]SaveConfigCallback.teardown                                                                                                                           	|  1.5581e-06     	|  1              	|  1.5581e-06     	|  9.7417e-07     	|
+|  [Callback]SaveModel.on_train_start                                                                                                                              	|  1.5539e-06     	|  1              	|  1.5539e-06     	|  9.7155e-07     	|
+|  [Callback]SaveConfigCallback.on_fit_start                                                                                                                       	|  1.499e-06      	|  1              	|  1.499e-06      	|  9.3719e-07     	|
+|  [Callback]ModelCheckpoint{'monitor': None, 'mode': 'min', 'every_n_train_steps': 800, 'every_n_epochs': 0, 'train_time_interval': None}.teardown                	|  1.4524e-06     	|  1              	|  1.4524e-06     	|  9.0808e-07     	|
+|  [Callback]ModelCheckpoint{'monitor': None, 'mode': 'min', 'every_n_train_steps': 800, 'every_n_epochs': 0, 'train_time_interval': None}.on_fit_end              	|  1.4426e-06     	|  1              	|  1.4426e-06     	|  9.0196e-07     	|
+|  [LightningModule]SquadBert.on_fit_end                                                                                                                           	|  1.4212e-06     	|  1              	|  1.4212e-06     	|  8.8857e-07     	|
+|  [LightningModule]SquadBert.on_train_end                                                                                                                         	|  1.4193e-06     	|  1              	|  1.4193e-06     	|  8.8741e-07     	|
+|  [Callback]RichModelSummary.on_train_end                                                                                                                         	|  1.3742e-06     	|  1              	|  1.3742e-06     	|  8.5917e-07     	|
+|  [Callback]SaveConfigCallback.on_fit_end                                                                                                                         	|  1.3611e-06     	|  1              	|  1.3611e-06     	|  8.5101e-07     	|
+|  [Callback]RichModelSummary.teardown                                                                                                                             	|  1.3397e-06     	|  1              	|  1.3397e-06     	|  8.3762e-07     	|
+|  [Callback]RichModelSummary.on_train_start                                                                                                                       	|  1.3197e-06     	|  1              	|  1.3197e-06     	|  8.251e-07      	|
+|  [Callback]RichModelSummary.on_fit_end                                                                                                                           	|  1.2917e-06     	|  1              	|  1.2917e-06     	|  8.0763e-07     	|
+|  [LightningModule]SquadBert.teardown                                                                                                                             	|  1.092e-06      	|  1              	|  1.092e-06      	|  6.8273e-07     	|
+|  [Strategy]DDPStrategy.on_train_end                                                                                                                              	|  1.0408e-06     	|  1              	|  1.0408e-06     	|  6.5071e-07     	|
+|  [Strategy]DDPStrategy.on_train_start                                                                                                                            	|  8.4704e-07     	|  1              	|  8.4704e-07     	|  5.2959e-07     	|
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+FIT Profiler Report
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+|  Action                                                                                                                                                          	|  Mean duration (s)	|  Num calls      	|  Total time (s) 	|  Percentage %   	|
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+|  Total                                                                                                                                                           	|  -              	|  25184          	|  192.33         	|  100 %          	|
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+|  run_training_epoch                                                                                                                                              	|  35.526         	|  4              	|  142.1          	|  73.884         	|
+|  run_training_batch                                                                                                                                              	|  0.27375        	|  512            	|  140.16         	|  72.873         	|
+|  [LightningModule]SquadBert.optimizer_step                                                                                                                       	|  0.27357        	|  512            	|  140.07         	|  72.824         	|
+|  [Strategy]DDPStrategy.backward                                                                                                                                  	|  0.017532       	|  512            	|  8.9762         	|  4.667          	|
+|  [Strategy]DDPStrategy.training_step                                                                                                                             	|  0.012533       	|  512            	|  6.417          	|  3.3364         	|
+|  [LightningDataModule]SquadData.prepare_data                                                                                                                     	|  4.2232         	|  1              	|  4.2232         	|  2.1958         	|
+|  [Callback]SquadEval.on_train_epoch_end                                                                                                                          	|  0.73286        	|  4              	|  2.9314         	|  1.5241         	|
+|  [LightningDataModule]SquadData.setup                                                                                                                            	|  1.6703         	|  1              	|  1.6703         	|  0.86845        	|
+|  [Callback]SaveModel.on_train_end                                                                                                                                	|  0.54312        	|  1              	|  0.54312        	|  0.28239        	|
+|  [_TrainingEpochLoop].train_dataloader_next                                                                                                                      	|  0.0010433      	|  512            	|  0.53419        	|  0.27774        	|
+|  [LightningModule]SquadBert.configure_optimizers                                                                                                                 	|  0.39069        	|  1              	|  0.39069        	|  0.20313        	|
+|  [LightningModule]SquadBert.optimizer_zero_grad                                                                                                                  	|  0.00051453     	|  512            	|  0.26344        	|  0.13697        	|
+|  [Strategy]DDPStrategy.batch_to_device                                                                                                                           	|  0.0001845      	|  512            	|  0.094465       	|  0.049115       	|
+|  [LightningModule]SquadBert.transfer_batch_to_device                                                                                                             	|  0.0001136      	|  512            	|  0.058164       	|  0.030241       	|
+|  [Callback]ModelCheckpoint{'monitor': None, 'mode': 'min', 'every_n_train_steps': 800, 'every_n_epochs': 0, 'train_time_interval': None}.on_train_epoch_end      	|  0.0061474      	|  4              	|  0.02459        	|  0.012785       	|
+|  [Callback]RichModelSummary.on_fit_start                                                                                                                         	|  0.019448       	|  1              	|  0.019448       	|  0.010111       	|
+|  [Callback]SaveConfigCallback.setup                                                                                                                              	|  0.017503       	|  1              	|  0.017503       	|  0.0091003      	|
+|  [Callback]ModelCheckpoint{'monitor': None, 'mode': 'min', 'every_n_train_steps': 800, 'every_n_epochs': 0, 'train_time_interval': None}.on_train_batch_end      	|  2.0403e-05     	|  512            	|  0.010446       	|  0.0054314      	|
+|  [LightningModule]SquadBert.configure_gradient_clipping                                                                                                          	|  1.8824e-05     	|  512            	|  0.0096379      	|  0.005011       	|
+|  [LightningModule]SquadBert.lr_scheduler_step                                                                                                                    	|  1.7843e-05     	|  512            	|  0.0091355      	|  0.0047498      	|
+|  [Callback]SquadEval.on_before_zero_grad                                                                                                                         	|  3.155e-06      	|  512            	|  0.0016154      	|  0.00083988     	|
+|  [Callback]SquadEval.on_after_backward                                                                                                                           	|  2.9415e-06     	|  512            	|  0.001506       	|  0.00078303     	|
+|  [Callback]SquadEval.on_train_batch_end                                                                                                                          	|  2.4895e-06     	|  512            	|  0.0012746      	|  0.00066271     	|
+|  [Callback]SquadEval.on_train_batch_start                                                                                                                        	|  2.1361e-06     	|  512            	|  0.0010937      	|  0.00056863     	|
+|  [Callback]SquadEval.on_before_backward                                                                                                                          	|  2.0954e-06     	|  512            	|  0.0010728      	|  0.0005578      	|
+|  [Callback]SquadEval.on_before_optimizer_step                                                                                                                    	|  1.7474e-06     	|  512            	|  0.00089465     	|  0.00046515     	|
+|  [LightningModule]SquadBert.on_before_batch_transfer                                                                                                             	|  1.6252e-06     	|  512            	|  0.00083211     	|  0.00043264     	|
+|  [Callback]SaveModel.on_before_zero_grad                                                                                                                         	|  1.5559e-06     	|  512            	|  0.00079662     	|  0.00041419     	|
+|  [Callback]SaveModel.on_train_batch_start                                                                                                                        	|  1.5441e-06     	|  512            	|  0.0007906      	|  0.00041105     	|
+|  [Callback]SaveModel.on_after_backward                                                                                                                           	|  1.5028e-06     	|  512            	|  0.00076943     	|  0.00040005     	|
+|  [Callback]ModelCheckpoint{'monitor': None, 'mode': 'min', 'every_n_train_steps': 800, 'every_n_epochs': 0, 'train_time_interval': None}.on_before_backward      	|  1.5e-06        	|  512            	|  0.00076798     	|  0.00039929     	|
+|  [Callback]SaveModel.on_train_batch_end                                                                                                                          	|  1.499e-06      	|  512            	|  0.00076748     	|  0.00039903     	|
+|  [Callback]ModelCheckpoint{'monitor': None, 'mode': 'min', 'every_n_train_steps': 800, 'every_n_epochs': 0, 'train_time_interval': None}.on_after_backward       	|  1.4346e-06     	|  512            	|  0.00073452     	|  0.0003819      	|
+|  [Callback]RichModelSummary.on_train_batch_end                                                                                                                   	|  1.4236e-06     	|  512            	|  0.0007289      	|  0.00037897     	|
+|  [Callback]SaveModel.on_before_backward                                                                                                                          	|  1.4039e-06     	|  512            	|  0.00071877     	|  0.00037371     	|
+|  [Callback]ModelCheckpoint{'monitor': None, 'mode': 'min', 'every_n_train_steps': 800, 'every_n_epochs': 0, 'train_time_interval': None}.on_before_optimizer_step	|  1.3866e-06     	|  512            	|  0.00070994     	|  0.00036912     	|
+|  [Callback]ModelCheckpoint{'monitor': None, 'mode': 'min', 'every_n_train_steps': 800, 'every_n_epochs': 0, 'train_time_interval': None}.on_before_zero_grad     	|  1.3743e-06     	|  512            	|  0.00070363     	|  0.00036584     	|
+|  [LightningModule]SquadBert.on_after_batch_transfer                                                                                                              	|  1.3554e-06     	|  512            	|  0.00069394     	|  0.0003608      	|
+|  [Callback]SaveConfigCallback.on_before_zero_grad                                                                                                                	|  1.3483e-06     	|  512            	|  0.00069035     	|  0.00035894     	|
+|  [Callback]SaveModel.on_before_optimizer_step                                                                                                                    	|  1.3441e-06     	|  512            	|  0.00068817     	|  0.0003578      	|
+|  [Callback]ModelCheckpoint{'monitor': None, 'mode': 'min', 'every_n_train_steps': 800, 'every_n_epochs': 0, 'train_time_interval': None}.on_train_batch_start    	|  1.3406e-06     	|  512            	|  0.00068637     	|  0.00035687     	|
+|  [Callback]SaveConfigCallback.on_train_batch_end                                                                                                                 	|  1.3177e-06     	|  512            	|  0.00067464     	|  0.00035077     	|
+|  [Callback]SaveConfigCallback.on_before_backward                                                                                                                 	|  1.3142e-06     	|  512            	|  0.00067285     	|  0.00034983     	|
+[epoch 0] validation EM=0.4531 F1=0.5904
+[epoch 1] validation EM=0.5703 F1=0.6964
+[epoch 2] validation EM=0.5781 F1=0.7106
+[epoch 3] validation EM=0.6172 F1=0.7312
+Memory used: 6.119751168 GB
+Final model saved in 0.5430 s
+|  [Callback]SaveConfigCallback.on_after_backward                                                                                                                  	|  1.3005e-06     	|  512            	|  0.00066587     	|  0.00034621     	|
+|  [Callback]SaveConfigCallback.on_train_batch_start                                                                                                               	|  1.2938e-06     	|  512            	|  0.00066245     	|  0.00034443     	|
+|  [Callback]SaveConfigCallback.on_before_optimizer_step                                                                                                           	|  1.272e-06      	|  512            	|  0.00065129     	|  0.00033862     	|
+|  [Callback]RichModelSummary.on_train_batch_start                                                                                                                 	|  1.2693e-06     	|  512            	|  0.00064988     	|  0.00033789     	|
+|  [LightningModule]SquadBert.on_before_zero_grad                                                                                                                  	|  1.2623e-06     	|  512            	|  0.00064631     	|  0.00033604     	|
+|  [Callback]RichModelSummary.on_before_zero_grad                                                                                                                  	|  1.2488e-06     	|  512            	|  0.00063937     	|  0.00033243     	|
+|  [Callback]RichModelSummary.on_before_optimizer_step                                                                                                             	|  1.2364e-06     	|  512            	|  0.00063305     	|  0.00032914     	|
+|  [Callback]RichModelSummary.on_before_backward                                                                                                                   	|  1.234e-06      	|  512            	|  0.0006318      	|  0.00032849     	|
+|  [Callback]RichModelSummary.on_after_backward                                                                                                                    	|  1.2086e-06     	|  512            	|  0.00061881     	|  0.00032174     	|
+|  [LightningModule]SquadBert.on_train_batch_start                                                                                                                 	|  1.0855e-06     	|  512            	|  0.00055577     	|  0.00028896     	|
+|  [LightningModule]SquadBert.on_after_backward                                                                                                                    	|  1.076e-06      	|  512            	|  0.00055091     	|  0.00028644     	|
+|  [LightningModule]SquadBert.on_train_batch_end                                                                                                                   	|  1.0634e-06     	|  512            	|  0.00054447     	|  0.00028309     	|
+|  [LightningModule]SquadBert.on_before_backward                                                                                                                   	|  9.7059e-07     	|  512            	|  0.00049694     	|  0.00025837     	|
+|  [Strategy]DDPStrategy.on_train_batch_start                                                                                                                      	|  9.6433e-07     	|  512            	|  0.00049374     	|  0.00025671     	|
+|  [LightningModule]SquadBert.on_before_optimizer_step                                                                                                             	|  8.9611e-07     	|  512            	|  0.00045881     	|  0.00023855     	|
+|  [LightningDataModule]SquadData.train_dataloader                                                                                                                 	|  0.00040658     	|  1              	|  0.00040658     	|  0.00021139     	|
+|  [Callback]ModelCheckpoint{'monitor': None, 'mode': 'min', 'every_n_train_steps': 800, 'every_n_epochs': 0, 'train_time_interval': None}.setup                   	|  0.00039299     	|  1              	|  0.00039299     	|  0.00020433     	|
+|  [Callback]SquadEval.on_train_end                                                                                                                                	|  0.00023461     	|  1              	|  0.00023461     	|  0.00012198     	|
+|  [Callback]SaveConfigCallback.on_train_end                                                                                                                       	|  1.9534e-05     	|  1              	|  1.9534e-05     	|  1.0156e-05     	|
+|  [LightningModule]SquadBert.setup                                                                                                                                	|  1.3832e-05     	|  1              	|  1.3832e-05     	|  7.1917e-06     	|
+|  [Callback]SaveModel.on_train_epoch_end                                                                                                                          	|  3.2165e-06     	|  4              	|  1.2866e-05     	|  6.6894e-06     	|
+|  [Callback]SquadEval.on_train_epoch_start                                                                                                                        	|  3.205e-06      	|  4              	|  1.282e-05      	|  6.6656e-06     	|
+|  [LightningModule]SquadBert.on_train_epoch_start                                                                                                                 	|  1.7965e-06     	|  4              	|  7.1859e-06     	|  3.7361e-06     	|
+|  [Callback]SaveModel.on_train_epoch_start                                                                                                                        	|  1.6775e-06     	|  4              	|  6.7098e-06     	|  3.4886e-06     	|
+|  [Callback]RichModelSummary.setup                                                                                                                                	|  6.4609e-06     	|  1              	|  6.4609e-06     	|  3.3592e-06     	|
+|  [Callback]SaveConfigCallback.on_train_epoch_end                                                                                                                 	|  1.566e-06      	|  4              	|  6.2641e-06     	|  3.2569e-06     	|
+|  [LightningModule]SquadBert.on_fit_start                                                                                                                         	|  6.0471e-06     	|  1              	|  6.0471e-06     	|  3.1441e-06     	|
+|  [Callback]SquadEval.on_train_start                                                                                                                              	|  5.989e-06      	|  1              	|  5.989e-06      	|  3.1139e-06     	|
+|  [Callback]ModelCheckpoint{'monitor': None, 'mode': 'min', 'every_n_train_steps': 800, 'every_n_epochs': 0, 'train_time_interval': None}.on_train_epoch_start    	|  1.383e-06      	|  4              	|  5.5322e-06     	|  2.8763e-06     	|
+|  [Callback]SaveConfigCallback.on_train_epoch_start                                                                                                               	|  1.373e-06      	|  4              	|  5.4919e-06     	|  2.8554e-06     	|
+|  [Callback]ModelCheckpoint{'monitor': None, 'mode': 'min', 'every_n_train_steps': 800, 'every_n_epochs': 0, 'train_time_interval': None}.on_fit_start            	|  5.1741e-06     	|  1              	|  5.1741e-06     	|  2.6902e-06     	|
+|  [LightningModule]SquadBert.on_train_epoch_end                                                                                                                   	|  1.2645e-06     	|  4              	|  5.058e-06      	|  2.6298e-06     	|
+|  [Callback]RichModelSummary.on_train_epoch_start                                                                                                                 	|  1.2575e-06     	|  4              	|  5.0298e-06     	|  2.6152e-06     	|
+|  [Callback]RichModelSummary.on_train_epoch_end                                                                                                                   	|  1.2328e-06     	|  4              	|  4.931e-06      	|  2.5638e-06     	|
+|  [Callback]SquadEval.on_fit_start                                                                                                                                	|  4.209e-06      	|  1              	|  4.209e-06      	|  2.1884e-06     	|
+|  [Callback]SquadEval.on_fit_end                                                                                                                                  	|  3.7439e-06     	|  1              	|  3.7439e-06     	|  1.9466e-06     	|
+|  [Callback]SquadEval.setup                                                                                                                                       	|  3.601e-06      	|  1              	|  3.601e-06      	|  1.8722e-06     	|
+|  [Callback]ModelCheckpoint{'monitor': None, 'mode': 'min', 'every_n_train_steps': 800, 'every_n_epochs': 0, 'train_time_interval': None}.on_train_start          	|  2.843e-06      	|  1              	|  2.843e-06      	|  1.4781e-06     	|
+|  [LightningModule]SquadBert.configure_callbacks                                                                                                                  	|  2.8191e-06     	|  1              	|  2.8191e-06     	|  1.4657e-06     	|
+|  [Callback]ModelCheckpoint{'monitor': None, 'mode': 'min', 'every_n_train_steps': 800, 'every_n_epochs': 0, 'train_time_interval': None}.on_train_end            	|  2.282e-06      	|  1              	|  2.282e-06      	|  1.1865e-06     	|
+|  [Callback]SquadEval.teardown                                                                                                                                    	|  2.183e-06      	|  1              	|  2.183e-06      	|  1.135e-06      	|
+|  [Callback]SaveModel.on_train_start                                                                                                                              	|  1.853e-06      	|  1              	|  1.853e-06      	|  9.6342e-07     	|
+|  [Callback]SaveConfigCallback.on_train_start                                                                                                                     	|  1.803e-06      	|  1              	|  1.803e-06      	|  9.3745e-07     	|
+|  [Callback]SaveModel.setup                                                                                                                                       	|  1.7791e-06     	|  1              	|  1.7791e-06     	|  9.2499e-07     	|
+|  [Callback]SaveModel.on_fit_start                                                                                                                                	|  1.7431e-06     	|  1              	|  1.7431e-06     	|  9.0628e-07     	|
+|  [LightningDataModule]SquadData.teardown                                                                                                                         	|  1.646e-06      	|  1              	|  1.646e-06      	|  8.558e-07      	|
+|  [Callback]SaveModel.on_fit_end                                                                                                                                  	|  1.581e-06      	|  1              	|  1.581e-06      	|  8.2203e-07     	|
+|  [LightningModule]SquadBert.on_train_end                                                                                                                         	|  1.58e-06       	|  1              	|  1.58e-06       	|  8.2148e-07     	|
+|  [Callback]SaveModel.teardown                                                                                                                                    	|  1.55e-06       	|  1              	|  1.55e-06       	|  8.0587e-07     	|
+|  [LightningModule]SquadBert.on_fit_end                                                                                                                           	|  1.522e-06      	|  1              	|  1.522e-06      	|  7.9134e-07     	|
+|  [Callback]RichModelSummary.on_train_end                                                                                                                         	|  1.495e-06      	|  1              	|  1.495e-06      	|  7.773e-07      	|
+|  [Callback]ModelCheckpoint{'monitor': None, 'mode': 'min', 'every_n_train_steps': 800, 'every_n_epochs': 0, 'train_time_interval': None}.on_fit_end              	|  1.458e-06      	|  1              	|  1.458e-06      	|  7.5805e-07     	|
+|  [Callback]SaveConfigCallback.on_fit_start                                                                                                                       	|  1.4299e-06     	|  1              	|  1.4299e-06     	|  7.4346e-07     	|
+|  [Callback]SaveConfigCallback.teardown                                                                                                                           	|  1.378e-06      	|  1              	|  1.378e-06      	|  7.1647e-07     	|
+|  [Callback]ModelCheckpoint{'monitor': None, 'mode': 'min', 'every_n_train_steps': 800, 'every_n_epochs': 0, 'train_time_interval': None}.teardown                	|  1.3771e-06     	|  1              	|  1.3771e-06     	|  7.1598e-07     	|
+|  [Strategy]DDPStrategy.on_train_end                                                                                                                              	|  1.3451e-06     	|  1              	|  1.3451e-06     	|  6.9934e-07     	|
+|  [Callback]RichModelSummary.on_train_start                                                                                                                       	|  1.325e-06      	|  1              	|  1.325e-06      	|  6.8893e-07     	|
+|  [LightningModule]SquadBert.on_train_start                                                                                                                       	|  1.303e-06      	|  1              	|  1.303e-06      	|  6.7749e-07     	|
+|  [Callback]RichModelSummary.teardown                                                                                                                             	|  1.2859e-06     	|  1              	|  1.2859e-06     	|  6.6859e-07     	|
+|  [Callback]SaveConfigCallback.on_fit_end                                                                                                                         	|  1.253e-06      	|  1              	|  1.253e-06      	|  6.5146e-07     	|
+|  [Callback]RichModelSummary.on_fit_end                                                                                                                           	|  1.25e-06       	|  1              	|  1.25e-06       	|  6.4989e-07     	|
+|  [Strategy]DDPStrategy.on_train_start                                                                                                                            	|  1.13e-06       	|  1              	|  1.13e-06       	|  5.8754e-07     	|
+|  [LightningModule]SquadBert.teardown                                                                                                                             	|  9.9395e-07     	|  1              	|  9.9395e-07     	|  5.1679e-07     	|
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+

@@ -96,8 +96,8 @@ and generates the plots for this report.
 | -            | -           |
 | Python       | 3.10.8      |
 | PyTorch      | 2.8.0+cu128 |
-| Lightning    | 2.8.0+cu128 |
-| CUDA         | 2.6.6       |
+| Lightning    | 2.6.6       |
+| CUDA         | 12.8        |
 | Transformers | 5.17.0      |
 | Datasets     | 5.0.1       |
 
